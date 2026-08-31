@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Japanese Foods IR & Culinary Engine | ระบบสืบค้นสูตรอาหารญี่ปุ่นอัจฉริยะ</title>
+  <meta name="description" content="Intelligent Information Retrieval, TF-IDF Vector Space Model, Pseudo-Relevance Feedback, and K-Means Clustering for Japanese Recipes">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@600;700;900&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="theme-dark">
+  <!-- Ambient background glow elements -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-pattern"></div>
+
+  <!-- Header: 2-Tier Modern App Bar (No Overlapping Guaranteed) -->
+  <header class="app-header">
+    <div class="header-main-wrapper">
+      <!-- Top Brand & Controls Row -->
+      <div class="header-top-row">
+        <div class="logo-group">
+          <div class="logo-icon">🍣</div>
+          <div class="logo-text">
+            <div class="logo-title">
+              <span data-i18n="app_title_main">JAPANESE FOODS</span>
+              <span class="badge-ir" data-i18n="app_title_badge">IR ENGINE</span>
+            </div>
+            <div class="logo-subtitle" data-i18n="app_subtitle">日本料理 情報検索システム · VSM · TF-IDF · K-Means</div>
+          </div>
+        </div>
+
+        <div class="header-controls">
+          <!-- Language Toggle Pill -->
+          <button class="lang-toggle-pill" id="lang-toggle-btn" title="Switch Language / สลับภาษา">
+            <span class="lang-flag" id="lang-flag-icon">🇹🇭</span>
+            <span class="lang-text" id="lang-text-label">ภาษาไทย</span>
+          </button>
+
+          <!-- Theme Toggle Button -->
+          <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Dark/Light Mode">
+            <span class="theme-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Segmented Tabs Row -->
+      <nav class="nav-tabs-wrapper" id="main-nav-tabs">
+        <button class="nav-tab active" data-tab="search-tab" id="tab-btn-search">
+          <span class="tab-icon">🔍</span> <span data-i18n="nav_search">ค้นหาสูตรอาหาร</span>
+        </button>
+        <button class="nav-tab" data-tab="pantry-tab" id="tab-btn-pantry">
+          <span class="tab-icon">🍱</span> <span data-i18n="nav_pantry">ค้นจากวัตถุดิบ</span>
+        </button>
+        <button class="nav-tab" data-tab="cluster-tab" id="tab-btn-cluster">
+          <span class="tab-icon">📊</span> <span data-i18n="nav_cluster">คลัสเตอร์ (PCA)</span>
+        </button>
+        <button class="nav-tab" data-tab="index-tab" id="tab-btn-index">
+          <span class="tab-icon">📖</span> <span data-i18n="nav_index">ดัชนีคำศัพท์</span>
+        </button>
+        <button class="nav-tab" data-tab="eval-tab" id="tab-btn-eval">
+          <span class="tab-icon">📈</span> <span data-i18n="nav_eval">ประเมินผล IR</span>
+        </button>
+        <button class="nav-tab" data-tab="pipeline-tab" id="tab-btn-pipeline">
+          <span class="tab-icon">⚙️</span> <span data-i18n="nav_pipeline">จัดการข้อมูล</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Application Body -->
+  <main class="app-main">
+
+    <!-- ==================== TAB 1: Search & Retrieval ==================== -->
+    <section class="tab-content active" id="search-tab">
+      <div class="search-hero-card">
+        <h1 class="hero-title" data-i18n="hero_title">ค้นหาสูตรอาหารญี่ปุ่นด้วยระบบ IR อัจฉริยะ</h1>
+        <p class="hero-desc" data-i18n="hero_desc">ประมวลผลด้วยโมเดล Vector Space Model (VSM), ถ่วงน้ำหนักคำด้วย TF-IDF และขยายคำค้นหาอัตโนมัติด้วย Pseudo-Relevance Feedback</p>
+        
+        <!-- Search Input Box -->
+        <div class="search-bar-container">
+          <span class="search-prefix-icon">🔍</span>
+          <input type="text" id="recipe-search-input" class="search-input" placeholder="พิมพ์ชื่อเมนู หรือวัตถุดิบ (เช่น ramen, teriyaki chicken, curry, miso)..." autofocus autocomplete="off">
+          <button id="search-clear-btn" class="search-clear-btn" title="Clear Search" style="display: none;">✕</button>
+          <button id="search-btn" class="search-submit-btn" data-i18n="btn_search">ค้นหา</button>
+        </div>
+
+        <!-- Category Filter Chips -->
+        <div class="category-chips-row">
+          <button class="category-chip active" data-cat="all" data-i18n="cat_all">✨ ทั้งหมด (All)</button>
+          <button class="category-chip" data-cat="ramen" data-i18n="cat_ramen">🍜 ราเมน & เส้น (Ramen)</button>
+          <button class="category-chip" data-cat="curry" data-i18n="cat_curry">🍛 แกงกะหรี่ (Curry)</button>
+          <button class="category-chip" data-cat="yakitori" data-i18n="cat_yakitori">🍢 ไก่ย่าง & เนื้อ (Meat)</button>
+          <button class="category-chip" data-cat="donburi" data-i18n="cat_donburi">🍱 ข้าวหน้า (Donburi)</button>
+          <button class="category-chip" data-cat="tofu" data-i18n="cat_tofu">🥗 สลัด & เต้าหู้ (Tofu)</button>
+          <button class="category-chip" data-cat="dessert" data-i18n="cat_dessert">🍵 ขนมหวาน (Dessert)</button>
+        </div>
+
+        <!-- Query Expansion Notification Bar (Compact & Sleek) -->
+        <div class="query-expansion-compact" id="query-expansion-card" style="display: none;">
+          <div class="expansion-compact-left">
+            <span class="badge-mini-prf">⚡ PRF Expansion</span>
+            <span class="expansion-text-preview">
+              <span data-i18n="exp_orig">คำค้นเดิม:</span> <code id="exp-original-query" class="code-tag">-</code>
+              &rarr; <span data-i18n="exp_final">ขยายผล:</span> <code id="exp-final-query" class="code-tag highlight">-</code>
+            </span>
+          </div>
+          <div class="expansion-terms-list" id="added-terms-container"></div>
+          <span class="info-tooltip-trigger" data-tooltip="prf_info" title="What is PRF?">ℹ️</span>
+        </div>
+      </div>
+
+      <!-- Controls & Filter Toolbar -->
+      <div class="results-toolbar">
+        <div class="filter-cluster-pills-bar">
+          <span class="toolbar-label" data-i18n="filter_cluster_label">กลุ่มคลัสเตอร์:</span>
+          <div class="cluster-pill-group" id="cluster-filter-group">
+            <button class="cluster-pill active" data-cluster="all" data-i18n="cluster_all">ทั้งหมด</button>
+            <button class="cluster-pill" data-cluster="0">C1</button>
+            <button class="cluster-pill" data-cluster="1">C2</button>
+            <button class="cluster-pill" data-cluster="2">C3</button>
+            <button class="cluster-pill" data-cluster="3">C4</button>
+            <button class="cluster-pill" data-cluster="4">C5</button>
+            <button class="cluster-pill" data-cluster="5">C6</button>
+          </div>
+        </div>
+        <div class="results-count-badge" id="results-count-text">กำลังโหลดสูตรอาหาร...</div>
+      </div>
+
+      <!-- Results Grid -->
+      <div class="results-container" id="results-container">
+        <div class="loading-spinner" id="search-loading" style="display: none;">
+          <div class="spinner"></div>
+          <p data-i18n="loading_search">กำลังคำนวณค่าความคล้ายคลึง Cosine Similarity...</p>
+        </div>
+        <div class="recipes-grid" id="recipes-grid">
+          <!-- Dynamically populated -->
+        </div>
+        <div class="empty-state" id="empty-state" style="display: none;">
+          <div class="empty-icon">🍣</div>
+          <h3 data-i18n="empty_search_title">ไม่พบสูตรอาหารที่ตรงกับคำค้นหา</h3>
+          <p data-i18n="empty_search_desc">ลองเปลี่ยนคำค้นหา หรือเลือกหมวดหมู่อาหารอื่นด้านบน</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: Pantry Matcher ==================== -->
+    <section class="tab-content" id="pantry-tab">
+      <div class="tab-header-card">
+        <h2 class="section-title" data-i18n="pantry_title">🍱 ค้นหาสูตรอาหารจากวัตถุดิบในตู้เย็น (Pantry Matcher)</h2>
+        <p class="section-desc" data-i18n="pantry_desc">เลือกวัตถุดิบที่มีอยู่ในครัว หรือกดปุ่มเมนูลัด ระบบ VSM จะคำนวณและแนะนำเมนูญี่ปุ่นที่มีสัดส่วนวัตถุดิบตรงกับที่คุณมีมากที่สุด</p>
+      </div>
+
+      <div class="pantry-layout">
+        <!-- Left Panel: Controls -->
+        <div class="pantry-sidebar">
+          <!-- Presets Section -->
+          <div class="zen-card">
+            <div class="card-title-row">
+              <span class="card-icon">⚡</span>
+              <h3 data-i18n="preset_title">ชุดวัตถุดิบสำเร็จรูป (One-Click Presets)</h3>
+            </div>
+            <p class="sub-caption" data-i18n="preset_desc">คลิกเพื่อเลือกชุดวัตถุดิบยอดนิยมทันที</p>
+            <div class="pantry-presets-grid">
+              <button class="preset-btn" data-preset="noodle">
+                <span class="preset-icon">🍜</span>
+                <div class="preset-text-group">
+                  <b data-i18n="preset_noodle_title">มื้อด่วนราเมน/อุด้ง</b>
+                  <small>udon, dashi, soy sauce, green onion, egg</small>
+                </div>
+              </button>
+              <button class="preset-btn" data-preset="izakaya">
+                <span class="preset-icon">🍢</span>
+                <div class="preset-text-group">
+                  <b data-i18n="preset_izakaya_title">ชุดปาร์ตี้อิซากายะ</b>
+                  <small>chicken, tare sauce, sake, garlic, ginger</small>
+                </div>
+              </button>
+              <button class="preset-btn" data-preset="curry">
+                <span class="preset-icon">🍛</span>
+                <div class="preset-text-group">
+                  <b data-i18n="preset_curry_title">ข้าวแกงกะหรี่อบอุ่น</b>
+                  <small>curry roux, onion, carrot, potato, chicken/beef</small>
+                </div>
+              </button>
+              <button class="preset-btn" data-preset="healthy">
+                <span class="preset-icon">🥗</span>
+                <div class="preset-text-group">
+                  <b data-i18n="preset_healthy_title">ชุดสุขภาพ & เต้าหู้</b>
+                  <small>tofu, spinach, sesame oil, miso, cucumber</small>
+                </div>
+              </button>
+              <button class="preset-btn" data-preset="bento">
+                <span class="preset-icon">🍙</span>
+                <div class="preset-text-group">
+                  <b data-i18n="preset_bento_title">ข้าวกล่องเบนโตะ</b>
+                  <small>rice, salmon, nori, egg, mirin, soy sauce</small>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Common Staples & Selection Box -->
+          <div class="zen-card">
+            <div class="card-title-row">
+              <span class="card-icon">🥢</span>
+              <h3 data-i18n="common_ing_title">เลือกวัตถุดิบอาหารญี่ปุ่น</h3>
+            </div>
+            <p class="sub-caption" data-i18n="common_ing_desc">คลิกเพื่อเลือกหรือยกเลิกวัตถุดิบ</p>
+            <div class="ingredient-chips-scroll" id="common-ingredients-chips">
+              <!-- Dynamically populated -->
+            </div>
+            
+            <div class="custom-ing-input-group">
+              <input type="text" id="custom-ingredient-input" placeholder="เพิ่มวัตถุดิบอื่น (เช่น dashi, mirin, sake)...">
+              <button id="add-ingredient-btn" class="btn-secondary" data-i18n="btn_add_ing">+ เพิ่ม</button>
+            </div>
+
+            <div class="pantry-selected-box">
+              <div class="pantry-selected-header">
+                <span><span data-i18n="selected_ing_label">วัตถุดิบที่เลือก</span> (<b id="selected-ing-count">0</b>):</span>
+                <button id="clear-pantry-btn" class="btn-link" data-i18n="btn_clear_all">ล้างทั้งหมด</button>
+              </div>
+              <div class="selected-pantry-pills" id="selected-pantry-pills">
+                <span class="placeholder-text" data-i18n="no_ing_selected">ยังไม่ได้เลือกวัตถุดิบ</span>
+              </div>
+            </div>
+
+            <button id="pantry-search-btn" class="btn-primary btn-block" data-i18n="btn_find_pantry">🔎 ค้นหาเมนูอาหารที่ทำได้</button>
+          </div>
+        </div>
+
+        <!-- Right Panel: Matched Recipes -->
+        <div class="pantry-results-area">
+          <div class="pantry-results-header">
+            <h3 data-i18n="matched_recipes_title">เมนูที่ตรงกับวัตถุดิบของคุณ</h3>
+            <span id="pantry-results-badge" class="badge-status" data-i18n="status_ready">พร้อมทำงาน</span>
+          </div>
+          <div class="recipes-grid" id="pantry-results-grid">
+            <div class="empty-state">
+              <div class="empty-icon">🥢</div>
+              <h3 data-i18n="pantry_empty_title">เลือกวัตถุดิบทางด้านซ้ายเพื่อเริ่มค้นหา</h3>
+              <p data-i18n="pantry_empty_desc">เลือกวัตถุดิบพื้นฐาน หรือคลิกชุด Presets ด้านบน</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: Cluster Map (PCA) ==================== -->
+    <section class="tab-content" id="cluster-tab">
+      <div class="tab-header-card">
+        <h2 class="section-title" data-i18n="cluster_title">📊 แผนภาพการจัดกลุ่มเมนูอาหาร (K-Means & 2D PCA)</h2>
+        <p class="section-desc" data-i18n="cluster_desc">สูตรอาหารทั้งหมดถูกจัดกลุ่มเป็น 6 คลัสเตอร์ตามคุณลักษณะ TF-IDF และลดมิติข้อมูลลงสู่ระนาบ 2D ด้วย Principal Component Analysis (PCA)</p>
+      </div>
+
+      <div class="cluster-layout">
+        <div class="chart-container-card">
+          <div class="chart-header">
+            <div>
+              <span class="chart-title" data-i18n="pca_chart_title">การกระจายตัวของสูตรอาหารในระนาบ 2D PCA</span>
+              <span class="info-tooltip-trigger" data-tooltip="pca_info">ℹ️</span>
+            </div>
+            <span class="chart-subtitle">K-Means (K=6) with Centroids (✖)</span>
+          </div>
+          <div class="canvas-wrapper">
+            <canvas id="pcaClusterChart"></canvas>
+          </div>
+        </div>
+
+        <div class="cluster-summary-card">
+          <h3 data-i18n="cluster_overview_title">ภาพรวมกลุ่มเมนูอาหาร (6 คลัสเตอร์)</h3>
+          <div class="cluster-cards-list" id="cluster-cards-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: Inverted Index Inspector ==================== -->
+    <section class="tab-content" id="index-tab">
+      <div class="tab-header-card">
+        <h2 class="section-title" data-i18n="index_title">📖 ดัชนีคำศัพท์แบบผกผัน (Inverted Index Inspector)</h2>
+        <p class="section-desc" data-i18n="index_desc">ตรวจสอบความถี่การปรากฏในเอกสาร (Document Frequency: DF) และรายการชี้เอกสาร (Postings List) ของคำศัพท์แต่ละคำในคลังข้อมูล</p>
+      </div>
+
+      <div class="index-inspector-layout">
+        <div class="zen-card">
+          <div class="card-title-row">
+            <h3 data-i18n="index_lookup_title">ค้นหาคำศัพท์ใน Inverted Index</h3>
+            <span class="info-tooltip-trigger" data-tooltip="inverted_index_info">ℹ️</span>
+          </div>
+          <div class="search-bar-container" style="margin-bottom: 1.25rem;">
+            <input type="text" id="term-lookup-input" class="search-input" placeholder="พิมพ์คำศัพท์ (เช่น chicken, dashi, soy, miso, ramen)...">
+            <button id="lookup-term-btn" class="search-submit-btn" data-i18n="btn_inspect">ตรวจสอบ Postings</button>
+          </div>
+          <div class="popular-terms-row">
+            <span class="popular-terms-label" data-i18n="quick_lookup_label">คำศัพท์ยอดนิยม:</span>
+            <div class="popular-terms-chips">
+              <button class="term-quick-btn" data-term="chicken">chicken</button>
+              <button class="term-quick-btn" data-term="sauce">sauce</button>
+              <button class="term-quick-btn" data-term="soy">soy</button>
+              <button class="term-quick-btn" data-term="onion">onion</button>
+              <button class="term-quick-btn" data-term="egg">egg</button>
+              <button class="term-quick-btn" data-term="garlic">garlic</button>
+              <button class="term-quick-btn" data-term="curry">curry</button>
+              <button class="term-quick-btn" data-term="tofu">tofu</button>
+              <button class="term-quick-btn" data-term="dashi">dashi</button>
+              <button class="term-quick-btn" data-term="nori">nori</button>
+            </div>
+          </div>
+
+          <div class="term-details-box" id="term-details-box" style="display: none;">
+            <div class="metric-row">
+              <div class="metric-box">
+                <div class="metric-val" id="metric-term-name">-</div>
+                <div class="metric-label" data-i18n="metric_term_label">คำศัพท์ (Term)</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-val" id="metric-term-df">-</div>
+                <div class="metric-label" data-i18n="metric_df_label">Document Frequency (DF)</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-val" id="metric-term-idf">-</div>
+                <div class="metric-label" data-i18n="metric_idf_label">อัตราส่วนความครอบคลุม</div>
+              </div>
+            </div>
+
+            <div class="postings-section">
+              <h4 data-i18n="postings_matched_title">Postings List (เอกสารที่พบคำศัพท์นี้):</h4>
+              <div class="postings-list" id="term-postings-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: IR Evaluation ==================== -->
+    <section class="tab-content" id="eval-tab">
+      <div class="tab-header-card">
+        <h2 class="section-title" data-i18n="eval_title">📈 กระดานประเมินประสิทธิภาพระบบสืบค้น (IR Evaluation)</h2>
+        <p class="section-desc" data-i18n="eval_desc">วัดผลคุณภาพการสืบค้นข้อมูลตามหลักทฤษฎี Information Retrieval ด้วยมาตรวัด Precision@K, Recall@K, Average Precision (AP), และ Mean Average Precision (MAP)</p>
+      </div>
+
+      <div class="eval-layout">
+        <div class="zen-card">
+          <div class="card-title-row">
+            <h3 data-i18n="eval_run_title">ทดสอบประเมินคำค้นหา (Query Benchmark)</h3>
+            <span class="info-tooltip-trigger" data-tooltip="eval_info">ℹ️</span>
+          </div>
+          <div class="eval-input-grid">
+            <div class="form-group">
+              <label for="eval-query-input" data-i18n="eval_query_label">คำค้นหาทดสอบ (Query):</label>
+              <input type="text" id="eval-query-input" value="chicken teriyaki">
+            </div>
+            <div class="form-group" style="max-width: 200px;">
+              <label for="eval-k-input" data-i18n="eval_k_label">ลำดับตัดเกณฑ์ (Cutoff Rank K):</label>
+              <input type="number" id="eval-k-input" value="10" min="1" max="50">
+            </div>
+            <button id="run-eval-btn" class="btn-primary" data-i18n="btn_compute_metrics">คำนวณผลการประเมิน</button>
+          </div>
+          
+          <div class="benchmark-suite">
+            <h4 data-i18n="benchmark_suite_label">ชุดคำถามทดสอบมาตรฐาน (Benchmark Suite):</h4>
+            <div class="benchmark-pills">
+              <button class="benchmark-pill" data-q="japanese curry" data-k="10">🍛 Japanese Curry (K=10)</button>
+              <button class="benchmark-pill" data-q="chicken meatballs" data-k="10">🍡 Chicken Meatballs (K=10)</button>
+              <button class="benchmark-pill" data-q="ramen noodles" data-k="10">🍜 Ramen Noodles (K=10)</button>
+              <button class="benchmark-pill" data-q="cucumber salad" data-k="10">🥒 Cucumber Salad (K=10)</button>
+              <button class="benchmark-pill" data-q="gyoza dumplings" data-k="10">🥟 Gyoza Dumplings (K=10)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metrics Display Grid -->
+        <div class="eval-metrics-grid" id="eval-metrics-display">
+          <div class="metric-card">
+            <div class="metric-header">
+              <span>Precision@K (P@K)</span>
+              <span class="info-tooltip-trigger" data-tooltip="precision_info">ℹ️</span>
+            </div>
+            <div class="metric-number" id="metric-pk">-</div>
+            <div class="metric-desc" data-i18n="metric_pk_desc">สัดส่วนเอกสารที่ตรงความต้องการ ในบรรดา K ลำดับแรกที่ดึงมา</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-header">
+              <span>Recall@K (R@K)</span>
+              <span class="info-tooltip-trigger" data-tooltip="recall_info">ℹ️</span>
+            </div>
+            <div class="metric-number" id="metric-rk">-</div>
+            <div class="metric-desc" data-i18n="metric_rk_desc">สัดส่วนเอกสารที่ดึงมาได้ ต่อจำนวนเอกสารที่เกี่ยวข้องทั้งหมดในระบบ</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-header">
+              <span>Average Precision (AP)</span>
+              <span class="info-tooltip-trigger" data-tooltip="ap_info">ℹ️</span>
+            </div>
+            <div class="metric-number" id="metric-ap">-</div>
+            <div class="metric-desc" data-i18n="metric_ap_desc">พื้นที่ใต้กราฟ Precision-Recall โดยคำนึงถึงลำดับความสำคัญของเอกสาร</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-header">
+              <span data-i18n="confusion_metrics_title">Confusion Metrics</span>
+              <span class="info-tooltip-trigger" data-tooltip="confusion_info">ℹ️</span>
+            </div>
+            <div class="confusion-stats">
+              <span class="badge-tp" title="True Positives">TP: <b id="metric-tp">-</b></span>
+              <span class="badge-fp" title="False Positives">FP: <b id="metric-fp">-</b></span>
+              <span class="badge-fn" title="False Negatives">FN: <b id="metric-fn">-</b></span>
+            </div>
+            <div class="metric-desc"><span data-i18n="total_rel_label">เอกสารที่เกี่ยวข้องทั้งหมด:</span> <b id="metric-total-rel">-</b></div>
+          </div>
+        </div>
+
+        <!-- Evaluation History & Session MAP -->
+        <div class="eval-history-card">
+          <div class="history-header">
+            <div>
+              <h3 data-i18n="history_table_title">ประวัติการประเมินในเซสชัน & ค่า Mean Average Precision (MAP)</h3>
+              <p class="sub-caption" data-i18n="history_table_desc">ค่า MAP คำนวณจากค่าเฉลี่ยของ Average Precision ทุกคำค้นหาที่ทดสอบในเซสชันนี้</p>
+            </div>
+            <div class="map-badge">
+              <span>Mean Average Precision (MAP):</span>
+              <span id="session-map-score" class="map-val">0.00</span>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" id="eval-history-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th data-i18n="th_query">คำค้นหา (Query)</th>
+                  <th>K</th>
+                  <th>Precision@K</th>
+                  <th>Recall@K</th>
+                  <th>Average Precision (AP)</th>
+                  <th>TP / Total Rel</th>
+                </tr>
+              </thead>
+              <tbody id="eval-history-tbody">
+                <tr><td colspan="7" class="empty-table-cell" data-i18n="empty_history_text">ยังไม่มีประวัติการประเมินในเซสชันนี้ ลองกดปุ่มทดสอบด้านบน</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 6: Data Pipeline & Web Scraper ==================== -->
+    <section class="tab-content" id="pipeline-tab">
+      <div class="tab-header-card">
+        <h2 class="section-title" data-i18n="pipeline_title">⚙️ ระบบท่อส่งข้อมูล & เว็บสแครปเปอร์ (Data Pipeline)</h2>
+        <p class="section-desc" data-i18n="pipeline_desc">จัดการชุดข้อมูลสูตรอาหารญี่ปุ่น สั่งดึงข้อมูลสดจากเว็บไซต์ Cookpad/Culinary API, ล้าง Stopwords และสร้างโมเดล VSM ใหม่แบบ Hot-Reload</p>
+      </div>
+
+      <div class="pipeline-layout">
+        <!-- Status Overview Grid -->
+        <div class="pipeline-stats-grid">
+          <div class="metric-card">
+            <div class="metric-header" data-i18n="stat_recipes_title">จำนวนสูตรอาหารในระบบ</div>
+            <div class="metric-number" id="pipeline-total-recipes">-</div>
+            <div class="metric-desc">data/processed/Japan_Food_Ingredients_Cleaned.csv</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-header" data-i18n="stat_vocab_title">ขนาดคลังคำศัพท์ (Vocabulary)</div>
+            <div class="metric-number" id="pipeline-vocab-size">-</div>
+            <div class="metric-desc" data-i18n="stat_vocab_desc">จำนวน Unique Tokens ใน TF-IDF Matrix</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-header" data-i18n="stat_clusters_title">จำนวนคลัสเตอร์ (K-Means)</div>
+            <div class="metric-number" id="pipeline-clusters-count">6</div>
+            <div class="metric-desc" data-i18n="stat_clusters_desc">กลุ่มแบ่งตามลักษณะวัตถุดิบ</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-header" data-i18n="stat_updated_title">อัปเดตล่าสุด</div>
+            <div class="metric-number" style="font-size: 1.25rem; color: #10b981;" id="pipeline-last-updated">-</div>
+            <div class="metric-desc" data-i18n="stat_updated_desc">เวลาการโหลดโมเดลเข้า RAM</div>
+          </div>
+        </div>
+
+        <!-- Pipeline Action Cards -->
+        <div class="pipeline-actions-grid">
+          <!-- Quick Clean & Reindex Card -->
+          <div class="zen-card action-card">
+            <div class="action-card-header">
+              <span class="action-icon">🔄</span>
+              <div>
+                <h3 data-i18n="card_reindex_title">ล้างข้อมูลและ Re-Index ทันที</h3>
+                <p data-i18n="card_reindex_desc">ตัดคำด้วย NLTK ล้าง Culinary Stopwords และฟิตโมเดล TF-IDF + K-Means ใหม่จากไฟล์ข้อมูลเดิม</p>
+              </div>
+            </div>
+            <div class="action-card-footer">
+              <span class="speed-badge" data-i18n="speed_instant">⚡ รวดเร็ว (~1 วินาที)</span>
+              <button id="quick-reindex-btn" class="btn-secondary" data-i18n="btn_run_reindex">รัน Re-Index ทันที</button>
+            </div>
+          </div>
+
+          <!-- Live Web Scraper Card -->
+          <div class="zen-card action-card action-card-highlight">
+            <div class="action-card-header">
+              <span class="action-icon">🌐</span>
+              <div>
+                <h3 data-i18n="card_scrape_title">ดึงข้อมูลสูตรอาหารสด (Live Web Scraper)</h3>
+                <p data-i18n="card_scrape_desc">Crawl เมนูอาหารญี่ปุ่นจาก Cookpad / Culinary API พร้อมสกัดวัตถุดิบและอัปเดตระบบสืบค้นอัตโนมัติ</p>
+              </div>
+            </div>
+            <div class="scrape-controls-row">
+              <div class="form-group" style="max-width: 220px;">
+                <label for="scrape-amount-select" data-i18n="scrape_amount_label">จำนวนเมนูที่ต้องการดึง:</label>
+                <select id="scrape-amount-select" class="form-select">
+                  <option value="10">10 เมนู (เร็ว ~15s)</option>
+                  <option value="20">20 เมนู (~30s)</option>
+                  <option value="50">50 เมนู (~1.5m)</option>
+                  <option value="100" selected>100 เมนู (เต็มชุดข้อมูล ~20s)</option>
+                </select>
+              </div>
+              <button id="start-scraping-btn" class="btn-primary" data-i18n="btn_start_scrape">🌐 Scrape & Rebuild Dataset</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal Log Viewer -->
+        <div class="terminal-card">
+          <div class="terminal-header">
+            <span>💻 <span data-i18n="terminal_header">บันทึกการทำงานของระบบ (Pipeline Execution Log)</span></span>
+            <button id="clear-logs-btn" class="btn-link" data-i18n="btn_clear_logs">ล้างประวัติ Log</button>
+          </div>
+          <div class="terminal-body" id="pipeline-terminal-body">
+            <div class="log-line">[System] Ready. Select an action above to trigger data pipeline.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== Recipe Detail Modal ==================== -->
+  <div class="modal-overlay" id="recipe-modal" style="display: none;">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+      <div class="modal-header">
+        <span class="modal-cluster-badge" id="modal-cluster-badge">Cluster 1</span>
+        <h2 class="modal-title" id="modal-recipe-title">Recipe Title</h2>
+        <div class="modal-meta">
+          <span class="modal-score" id="modal-recipe-score">Cosine Similarity: 0.8521</span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <div class="section-title-with-action">
+            <h3 data-i18n="modal_ing_title">🥢 รายการวัตถุดิบ (Ingredients):</h3>
+            <button id="copy-ingredients-btn" class="btn-copy-sm" title="Copy Ingredients">📋 <span data-i18n="btn_copy_ing">คัดลอกวัตถุดิบ</span></button>
+          </div>
+          <div class="ingredients-content-box" id="modal-ingredients-text">
+            Ingredients details...
+          </div>
+        </div>
+        <div class="modal-section">
+          <h3 data-i18n="modal_tokens_title">🏷️ Cleaned IR Tokens (คำสำคัญที่ใช้ในการสืบค้น):</h3>
+          <div class="token-pills" id="modal-cleaned-tokens"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a id="modal-external-link" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary" data-i18n="btn_view_cookpad">
+          ดูสูตรต้นฉบับบนเว็บ Cookpad ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Educational IR Tooltip Modal / Floating Box -->
+  <div class="ir-tooltip-popup" id="ir-tooltip-popup" style="display: none;">
+    <div class="ir-tooltip-header">
+      <span class="ir-tooltip-title" id="ir-tooltip-title">IR Concept</span>
+      <button class="ir-tooltip-close" id="ir-tooltip-close">&times;</button>
+    </div>
+    <div class="ir-tooltip-body" id="ir-tooltip-body">
+      Concept explanation text...
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-content">
+      <p><b>Japanese Foods IR System</b> &middot; Information Retrieval & Natural Language Processing Engine</p>
+      <p data-i18n="footer_credit">พัฒนาด้วยทฤษฎี Vector Space Model (VSM), TF-IDF Cosine Similarity, Pseudo-Relevance Feedback (PRF), K-Means Clustering, และ 2D PCA</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

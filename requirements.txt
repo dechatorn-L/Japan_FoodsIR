@@ -1,0 +1,16 @@
+# Core Data & ML
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+nltk>=3.8.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Web Frameworks
+streamlit>=1.30.0
+
+# Web Scraping
+beautifulsoup4>=4.12.0
+requests>=2.31.0
