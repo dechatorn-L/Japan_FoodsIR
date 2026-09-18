@@ -21,13 +21,13 @@ const I18N = {
     hero_title: 'ค้นหาสูตรอาหารญี่ปุ่นด้วยระบบ IR อัจฉริยะ',
     hero_desc: 'ประมวลผลด้วยโมเดล Vector Space Model (VSM), ถ่วงน้ำหนักคำด้วย TF-IDF และขยายคำค้นหาอัตโนมัติด้วย Pseudo-Relevance Feedback',
     category_label: 'หมวดหมู่อาหาร:',
-    cat_all: '✨ ทั้งหมด (All)',
-    cat_ramen: '🍜 ราเมน & เส้น (Ramen)',
-    cat_curry: '🍛 แกงกะหรี่ & ต้ม (Curry)',
-    cat_yakitori: '🍢 ไก่ย่าง & เนื้อ (Meat)',
-    cat_donburi: '🍱 ข้าวหน้า & เบนโตะ (Donburi)',
-    cat_tofu: '🥗 สลัด & เต้าหู้ (Tofu/Salad)',
-    cat_dessert: '🍵 ขนมหวาน & มัทฉะ (Dessert)',
+    cat_all: 'ทั้งหมด (All)',
+    cat_ramen: 'ราเมน & เส้น (Ramen)',
+    cat_curry: 'แกงกะหรี่ & ต้ม (Curry)',
+    cat_yakitori: 'ไก่ย่าง & เนื้อ (Meat)',
+    cat_donburi: 'ข้าวหน้า & เบนโตะ (Donburi)',
+    cat_tofu: 'สลัด & เต้าหู้ (Tofu/Salad)',
+    cat_dessert: 'ขนมหวาน & มัทฉะ (Dessert)',
     search_placeholder: 'พิมพ์ชื่อเมนู หรือวัตถุดิบ (เช่น ramen, teriyaki chicken, curry, miso, sando)...',
     btn_search: 'ค้นหา',
     suggestions_label: 'คำค้นแนะนำ:',
@@ -43,7 +43,7 @@ const I18N = {
     showing_results: 'พบ {count} สูตรอาหาร',
 
     // Pantry Tab
-    pantry_title: '🍱 ค้นหาสูตรอาหารจากวัตถุดิบในตู้เย็น (Pantry Matcher)',
+    pantry_title: 'ค้นหาสูตรอาหารจากวัตถุดิบในตู้เย็น (Pantry Matcher)',
     pantry_desc: 'เลือกวัตถุดิบที่มีอยู่ในครัว หรือกดปุ่มเมนูลัด ระบบ VSM จะคำนวณและแนะนำเมนูญี่ปุ่นที่มีสัดส่วนวัตถุดิบตรงกับที่คุณมีมากที่สุด',
     preset_title: 'ชุดวัตถุดิบสำเร็จรูป (One-Click Presets)',
     preset_desc: 'คลิกเพื่อเลือกชุดวัตถุดิบยอดนิยมทันที',
@@ -59,17 +59,17 @@ const I18N = {
     selected_ing_label: 'วัตถุดิบที่เลือก',
     btn_clear_all: 'ล้างทั้งหมด',
     no_ing_selected: 'ยังไม่ได้เลือกวัตถุดิบ',
-    btn_find_pantry: '🔎 ค้นหาเมนูอาหารที่ทำได้',
+    btn_find_pantry: 'ค้นหาเมนูอาหารที่ทำได้',
     matched_recipes_title: 'เมนูที่ตรงกับวัตถุดิบของคุณ',
     status_ready: 'พร้อมทำงาน',
     pantry_empty_title: 'เลือกวัตถุดิบทางด้านซ้ายเพื่อเริ่มค้นหา',
     pantry_empty_desc: 'เลือกวัตถุดิบพื้นฐาน เช่น chicken, soy sauce, sake, egg หรือคลิกชุด Presets ด้านบน',
-    have_tag: '✓ มี:',
-    need_tag: '+ ขาดอีก:',
+    have_tag: 'มี:',
+    need_tag: 'ขาดอีก:',
     cook_recipe_link: 'ดูวิธีทำเมนูนี้ →',
 
     // Cluster Tab
-    cluster_title: '📊 แผนภาพการจัดกลุ่มเมนูอาหาร (K-Means & 2D PCA)',
+    cluster_title: 'แผนภาพการจัดกลุ่มเมนูอาหาร (K-Means & 2D PCA)',
     cluster_desc: 'สูตรอาหารทั้งหมดถูกจัดกลุ่มเป็น 6 คลัสเตอร์ตามคุณลักษณะ TF-IDF และลดมิติข้อมูลลงสู่ระนาบ 2D ด้วย Principal Component Analysis (PCA)',
     pca_chart_title: 'การกระจายตัวของสูตรอาหารในระนาบ 2D PCA',
     cluster_overview_title: 'ภาพรวมกลุ่มเมนูอาหาร (6 คลัสเตอร์)',
@@ -77,7 +77,7 @@ const I18N = {
     top_samples: 'ตัวอย่างเมนูเด่น:',
 
     // Inverted Index Tab
-    index_title: '📖 ดัชนีคำศัพท์แบบผกผัน (Inverted Index Inspector)',
+    index_title: 'ดัชนีคำศัพท์แบบผกผัน (Inverted Index Inspector)',
     index_desc: 'ตรวจสอบความถี่การปรากฏในเอกสาร (Document Frequency: DF) และรายการชี้เอกสาร (Postings List) ของคำศัพท์แต่ละคำในคลังข้อมูล',
     index_lookup_title: 'ค้นหาคำศัพท์ใน Inverted Index',
     term_placeholder: 'พิมพ์คำศัพท์ (เช่น chicken, dashi, soy, miso, ramen)...',
@@ -90,7 +90,7 @@ const I18N = {
     term_not_found: 'ไม่พบคำศัพท์ "{term}" ในคลังดัชนี',
 
     // Evaluation Tab
-    eval_title: '📈 กระดานประเมินประสิทธิภาพระบบสืบค้น (IR Evaluation)',
+    eval_title: 'กระดานประเมินประสิทธิภาพระบบสืบค้น (IR Evaluation)',
     eval_desc: 'วัดผลคุณภาพการสืบค้นข้อมูลตามหลักทฤษฎี Information Retrieval ด้วยมาตรวัด Precision@K, Recall@K, Average Precision (AP), และ Mean Average Precision (MAP)',
     eval_run_title: 'ทดสอบประเมินคำค้นหา (Query Benchmark)',
     eval_query_label: 'คำค้นหาทดสอบ (Query):',
@@ -108,7 +108,7 @@ const I18N = {
     empty_history_text: 'ยังไม่มีประวัติการประเมินในเซสชันนี้ ลองกดปุ่มทดสอบด้านบน',
 
     // Pipeline Tab
-    pipeline_title: '⚙️ ระบบท่อส่งข้อมูล & เว็บสแครปเปอร์ (Data Pipeline)',
+    pipeline_title: 'ระบบท่อส่งข้อมูล & เว็บสแครปเปอร์ (Data Pipeline)',
     pipeline_desc: 'จัดการชุดข้อมูลสูตรอาหารญี่ปุ่น สั่งดึงข้อมูลสดจากเว็บไซต์ Cookpad/Culinary API, ล้าง Stopwords และสร้างโมเดล VSM ใหม่แบบ Hot-Reload',
     stat_recipes_title: 'จำนวนสูตรอาหารในระบบ',
     stat_vocab_title: 'ขนาดคลังคำศัพท์ (Vocabulary)',
@@ -119,20 +119,20 @@ const I18N = {
     stat_updated_desc: 'เวลาการโหลดโมเดลเข้า RAM',
     card_reindex_title: 'ล้างข้อมูลและ Re-Index ทันที',
     card_reindex_desc: 'ตัดคำด้วย NLTK ล้าง Culinary Stopwords และฟิตโมเดล TF-IDF + K-Means ใหม่จากไฟล์ข้อมูลเดิม',
-    speed_instant: '⚡ รวดเร็ว (~1 วินาที)',
+    speed_instant: 'รวดเร็ว (~1 วินาที)',
     btn_run_reindex: 'รัน Re-Index ทันที',
     card_scrape_title: 'ดึงข้อมูลสูตรอาหารสด (Live Web Scraper)',
     card_scrape_desc: 'Crawl เมนูอาหารญี่ปุ่นจาก Cookpad / Culinary API พร้อมสกัดวัตถุดิบและอัปเดตระบบสืบค้นอัตโนมัติ',
     scrape_amount_label: 'จำนวนเมนูที่ต้องการดึง:',
-    btn_start_scrape: '🌐 Scrape & Rebuild Dataset',
+    btn_start_scrape: 'Scrape & Rebuild Dataset',
     terminal_header: 'บันทึกการทำงานของระบบ (Pipeline Execution Log)',
     btn_clear_logs: 'ล้างประวัติ Log',
 
     // Modal & Extras
-    modal_ing_title: '🥢 รายการวัตถุดิบ (Ingredients):',
+    modal_ing_title: 'รายการวัตถุดิบ (Ingredients):',
     btn_copy_ing: 'คัดลอกวัตถุดิบ',
     btn_copied: 'คัดลอกแล้ว! ✓',
-    modal_tokens_title: '🏷️ Cleaned IR Tokens (คำสำคัญที่ใช้ในการสืบค้น):',
+    modal_tokens_title: 'Cleaned IR Tokens (คำสำคัญที่ใช้ในการสืบค้น):',
     btn_view_cookpad: 'ดูสูตรต้นฉบับบนเว็บ Cookpad ↗',
     footer_credit: 'พัฒนาด้วยทฤษฎี Vector Space Model (VSM), TF-IDF Cosine Similarity, Pseudo-Relevance Feedback (PRF), K-Means Clustering, และ 2D PCA'
   },
@@ -152,13 +152,13 @@ const I18N = {
     hero_title: 'Discover Japanese Culinary Recipes',
     hero_desc: 'Powered by Vector Space Model (VSM), TF-IDF Term Weighting, and Pseudo-Relevance Feedback (Query Expansion)',
     category_label: 'Food Categories:',
-    cat_all: '✨ All Recipes',
-    cat_ramen: '🍜 Ramen & Noodles',
-    cat_curry: '🍛 Curry & Stews',
-    cat_yakitori: '🍢 Yakitori & Meat',
-    cat_donburi: '🍱 Rice & Donburi',
-    cat_tofu: '🥗 Salad & Tofu',
-    cat_dessert: '🍵 Desserts & Matcha',
+    cat_all: 'All Recipes',
+    cat_ramen: 'Ramen & Noodles',
+    cat_curry: 'Curry & Stews',
+    cat_yakitori: 'Yakitori & Meat',
+    cat_donburi: 'Rice & Donburi',
+    cat_tofu: 'Salad & Tofu',
+    cat_dessert: 'Desserts & Matcha',
     search_placeholder: 'Search dish or ingredients (e.g. ramen, teriyaki chicken, curry, miso, sando)...',
     btn_search: 'Search',
     suggestions_label: 'Quick Suggestions:',
@@ -174,7 +174,7 @@ const I18N = {
     showing_results: 'Found {count} recipes',
 
     // Pantry Tab
-    pantry_title: '🍱 Japanese Pantry & Fridge Matcher',
+    pantry_title: 'Japanese Pantry & Fridge Matcher',
     pantry_desc: 'Select ingredients in your fridge or choose a preset. Our VSM engine matches recipes with highest overlap and cosine similarity.',
     preset_title: 'One-Click Culinary Presets',
     preset_desc: 'Quickly populate common ingredient combinations',
@@ -190,17 +190,17 @@ const I18N = {
     selected_ing_label: 'Selected Ingredients',
     btn_clear_all: 'Clear All',
     no_ing_selected: 'No ingredients selected yet',
-    btn_find_pantry: '🔎 Find Matching Recipes',
+    btn_find_pantry: 'Find Matching Recipes',
     matched_recipes_title: 'Matched Japanese Recipes',
     status_ready: 'Ready',
     pantry_empty_title: 'Select ingredients on the left to start',
     pantry_empty_desc: 'Pick common staples like chicken, soy sauce, sake, egg, or click presets above.',
-    have_tag: '✓ Have:',
-    need_tag: '+ Need:',
+    have_tag: 'Have:',
+    need_tag: 'Need:',
     cook_recipe_link: 'Cook this Recipe →',
 
     // Cluster Tab
-    cluster_title: '📊 Japanese Recipe Clustering (K-Means & 2D PCA)',
+    cluster_title: 'Japanese Recipe Clustering (K-Means & 2D PCA)',
     cluster_desc: 'All recipes are grouped into 6 clusters based on TF-IDF vectors and projected onto a 2D plane using Principal Component Analysis (PCA).',
     pca_chart_title: '2D PCA Recipe Spatial Distribution',
     cluster_overview_title: 'Culinary Clusters Overview (K=6)',
@@ -208,7 +208,7 @@ const I18N = {
     top_samples: 'Top Samples:',
 
     // Inverted Index Tab
-    index_title: '📖 Inverted Index & Vocabulary Inspector',
+    index_title: 'Inverted Index & Vocabulary Inspector',
     index_desc: 'Inspect Document Frequency (DF) and Postings Lists for vocabulary terms indexed in the IR engine.',
     index_lookup_title: 'Lookup Vocabulary Term',
     term_placeholder: 'Enter term (e.g. chicken, dashi, soy, miso, ramen)...',
@@ -221,7 +221,7 @@ const I18N = {
     term_not_found: 'Term "{term}" was not found in the index dictionary',
 
     // Evaluation Tab
-    eval_title: '📈 Information Retrieval Evaluation Dashboard',
+    eval_title: 'Information Retrieval Evaluation Dashboard',
     eval_desc: 'Evaluate retrieval quality using standard IR metrics: Precision@K, Recall@K, Average Precision (AP), and Mean Average Precision (MAP).',
     eval_run_title: 'Query Benchmark Test',
     eval_query_label: 'Test Query:',
@@ -239,7 +239,7 @@ const I18N = {
     empty_history_text: 'No evaluation tests performed in this session yet.',
 
     // Pipeline Tab
-    pipeline_title: '⚙️ Data Ingestion Pipeline & Web Scraper',
+    pipeline_title: 'Data Ingestion Pipeline & Web Scraper',
     pipeline_desc: 'Manage Japanese recipe dataset, trigger live web scraping from Cookpad/Culinary API, clean stopwords, and hot-reload models.',
     stat_recipes_title: 'Total Indexed Recipes',
     stat_vocab_title: 'Vocabulary Size (Tokens)',
@@ -250,20 +250,20 @@ const I18N = {
     stat_updated_desc: 'In-memory model timestamp',
     card_reindex_title: 'Quick Clean & Re-Index',
     card_reindex_desc: 'Tokenize with NLTK, remove culinary stopwords, and re-fit TF-IDF & K-Means from local raw files.',
-    speed_instant: '⚡ Instant (~1 sec)',
+    speed_instant: 'Instant (~1 sec)',
     btn_run_reindex: 'Run Quick Re-Index',
     card_scrape_title: 'Live Cookpad Web Scraper',
     card_scrape_desc: 'Crawl fresh Japanese recipes from Cookpad / Culinary APIs, extract ingredients, and rebuild search index.',
     scrape_amount_label: 'Target Recipes Count:',
-    btn_start_scrape: '🌐 Scrape & Rebuild Dataset',
+    btn_start_scrape: 'Scrape & Rebuild Dataset',
     terminal_header: 'Pipeline Execution Log Terminal',
     btn_clear_logs: 'Clear Logs',
 
     // Modal & Extras
-    modal_ing_title: '🥢 Recipe Ingredients:',
+    modal_ing_title: 'Recipe Ingredients:',
     btn_copy_ing: 'Copy Ingredients',
     btn_copied: 'Copied! ✓',
-    modal_tokens_title: '🏷️ Cleaned IR Tokens (Indexed Features):',
+    modal_tokens_title: 'Cleaned IR Tokens (Indexed Features):',
     btn_view_cookpad: 'View Original Recipe on Cookpad ↗',
     footer_credit: 'Built with Vector Space Model (VSM), TF-IDF Cosine Similarity, Pseudo-Relevance Feedback, K-Means Clustering, and 2D PCA.'
   }
@@ -273,69 +273,69 @@ const I18N = {
 const IR_TOOLTIPS = {
   th: {
     prf_info: {
-      title: '⚡ Pseudo-Relevance Feedback (PRF)',
+      title: 'Pseudo-Relevance Feedback (PRF)',
       body: 'อัลกอริทึมขยายคำค้นหาอัตโนมัติ โดยระบบจะถือว่าผลลัพธ์ 10 อันดับแรกที่ดึงมาเป็นเอกสารที่เกี่ยวข้อง (Relevant) และดึงคำศัพท์ที่มีความถี่ร่วมสูงสุดมาต่อท้ายคำค้นหาเดิม เพื่อเพิ่มค่า Recall โดยที่ผู้ใช้ไม่ต้องพิมพ์คำเพิ่มเอง'
     },
     pca_info: {
-      title: '📊 2D PCA & K-Means Clustering',
+      title: '2D PCA & K-Means Clustering',
       body: 'สูตรอาหารในระบบมีเวกเตอร์คำศัพท์หลายร้อยมิติ เราใช้ Principal Component Analysis (PCA) ในการลดมิติข้อมูลลงเหลือ 2 มิติหลัก (X, Y) เพื่อนำมาพล็อตแสดงผลบนระนาบ 2D ให้เห็นการเกาะกลุ่มของเมนูอาหารที่มีวัตถุดิบใกล้เคียงกัน'
     },
     inverted_index_info: {
-      title: '📖 Inverted Index (ดัชนีแบบผกผัน)',
+      title: 'Inverted Index (ดัชนีแบบผกผัน)',
       body: 'โครงสร้างข้อมูลหลักในระบบ Information Retrieval ที่แมปคำศัพท์แต่ละคำ (Term) ไปยังรายการเอกสารทั้งหมดที่มีคำนี้ปรากฏอยู่ (Postings List) ช่วยให้ค้นหาเอกสารได้ในเวลา O(1) โดยไม่ต้องสแกนทุกสูตรอาหาร'
     },
     eval_info: {
-      title: '📈 IR Evaluation Metrics',
+      title: 'IR Evaluation Metrics',
       body: 'การวัดผลระบบสืบค้นข้อมูล ใช้คำนวณความแม่นยำ (Precision) และความครอบคลุม (Recall) เทียบกับชุดเอกสารที่เกี่ยวข้องจริงในคลังข้อมูล'
     },
     precision_info: {
-      title: '🎯 Precision@K (P@K)',
+      title: 'Precision@K (P@K)',
       body: 'สูตร: TP / K\nวัดสัดส่วนว่าในจำนวนผลลัพธ์ K รายการแรกที่ระบบดึงมา มีกี่เปอร์เซ็นต์ที่เป็นเมนูที่ตรงกับความต้องการจริงๆ'
     },
     recall_info: {
-      title: '🔍 Recall@K (R@K)',
+      title: 'Recall@K (R@K)',
       body: 'สูตร: TP / Total Relevant\nวัดสัดส่วนว่าในบรรดาสูตรอาหารทั้งหมดที่เกี่ยวข้องในระบบ เราดึงขึ้นมาได้แล้วกี่เปอร์เซ็นต์ใน K ลำดับแรก'
     },
     ap_info: {
-      title: '⭐ Average Precision (AP)',
+      title: 'Average Precision (AP)',
       body: 'คำนวณพื้นที่ใต้กราฟ Precision-Recall โดยให้รางวัลสูงกับระบบที่จัดอันดับเอกสารที่เกี่ยวข้องไว้ในลำดับต้นๆ (Top Ranks)'
     },
     confusion_info: {
-      title: '📊 Confusion Matrix',
+      title: 'Confusion Matrix',
       body: 'TP (True Positives): ดึงมาและเกี่ยวข้องจริง\nFP (False Positives): ดึงมาแต่ไม่เกี่ยวข้อง\nFN (False Negatives): เกี่ยวข้องแต่ระบบไม่ได้ดึงมา'
     }
   },
   en: {
     prf_info: {
-      title: '⚡ Pseudo-Relevance Feedback (PRF)',
+      title: 'Pseudo-Relevance Feedback (PRF)',
       body: 'An automated query expansion technique that assumes top-10 retrieved documents are relevant. It extracts the most frequent co-occurring culinary concepts and appends them to the original query to improve recall.'
     },
     pca_info: {
-      title: '📊 2D PCA & K-Means Clustering',
+      title: '2D PCA & K-Means Clustering',
       body: 'Recipe vectors span hundreds of dimensions. Principal Component Analysis (PCA) reduces these into 2 principal orthogonal components (X, Y) for 2D spatial visualization of culinary groupings.'
     },
     inverted_index_info: {
-      title: '📖 Inverted Index Architecture',
+      title: 'Inverted Index Architecture',
       body: 'Core IR data structure mapping each vocabulary term to a postings list of document IDs. Enables sub-millisecond retrieval without scanning the full corpus.'
     },
     eval_info: {
-      title: '📈 IR Evaluation Metrics',
+      title: 'IR Evaluation Metrics',
       body: 'Standard evaluation framework measuring retrieval precision, recall, ranking quality, and Mean Average Precision against ground-truth culinary relevance.'
     },
     precision_info: {
-      title: '🎯 Precision@K (P@K)',
+      title: 'Precision@K (P@K)',
       body: 'Formula: TP / K\nMeasures the percentage of relevant recipes within the top-K retrieved results.'
     },
     recall_info: {
-      title: '🔍 Recall@K (R@K)',
+      title: 'Recall@K (R@K)',
       body: 'Formula: TP / Total Relevant\nMeasures what percentage of all relevant recipes in the corpus were retrieved within the top-K cutoff.'
     },
     ap_info: {
-      title: '⭐ Average Precision (AP)',
+      title: 'Average Precision (AP)',
       body: 'Area under the Precision-Recall curve, weighting earlier relevant retrievals more heavily than later ones.'
     },
     confusion_info: {
-      title: '📊 Confusion Matrix',
+      title: 'Confusion Matrix',
       body: 'TP (True Positives): Retrieved & Relevant\nFP (False Positives): Retrieved but Irrelevant\nFN (False Negatives): Relevant but missed'
     }
   }
@@ -566,37 +566,76 @@ function initTheme() {
 function applyTheme(theme) {
   state.theme = theme;
   localStorage.setItem('food_ir_theme', theme);
+  const sunSvg = `<svg class="svg-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+  const moonSvg = `<svg class="svg-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+
   if (theme === 'light') {
     document.body.classList.remove('theme-dark');
     document.body.classList.add('theme-light');
-    if (elements.themeToggleBtn) elements.themeToggleBtn.querySelector('.theme-icon').textContent = '☀️';
+    if (elements.themeToggleBtn) {
+      elements.themeToggleBtn.innerHTML = `<span class="theme-icon" aria-hidden="true">${sunSvg}</span>`;
+      elements.themeToggleBtn.setAttribute('aria-label', 'Switch to Dark Mode');
+    }
   } else {
     document.body.classList.remove('theme-light');
     document.body.classList.add('theme-dark');
-    if (elements.themeToggleBtn) elements.themeToggleBtn.querySelector('.theme-icon').textContent = '🌙';
+    if (elements.themeToggleBtn) {
+      elements.themeToggleBtn.innerHTML = `<span class="theme-icon" aria-hidden="true">${moonSvg}</span>`;
+      elements.themeToggleBtn.setAttribute('aria-label', 'Switch to Light Mode');
+    }
   }
   if (state.pcaChart) renderPCAChart();
 }
 
-// ==================== NAVIGATION TABS ====================
+// ==================== NAVIGATION TABS & DEEP LINKING ====================
 function initNavigation() {
   elements.navTabs.forEach(tab => {
     tab.addEventListener('click', () => {
       const targetTabId = tab.getAttribute('data-tab');
-      elements.navTabs.forEach(t => t.classList.remove('active'));
-      elements.tabContents.forEach(c => c.classList.remove('active'));
-
-      tab.classList.add('active');
-      const targetContent = document.getElementById(targetTabId);
-      if (targetContent) targetContent.classList.add('active');
-
-      if (targetTabId === 'cluster-tab') {
-        setTimeout(fetchClusterData, 100);
-      } else if (targetTabId === 'pipeline-tab') {
-        setTimeout(fetchPipelineStatus, 100);
-      }
+      switchTab(targetTabId, true);
     });
   });
+
+  // URL Hash Deep Linking
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && !hash.startsWith('recipe-')) {
+      switchTab(`${hash}-tab`, false);
+    }
+  });
+
+  // Initial tab from URL hash if present
+  const initialHash = window.location.hash.replace('#', '');
+  if (initialHash && !initialHash.startsWith('recipe-')) {
+    switchTab(`${initialHash}-tab`, false);
+  }
+}
+
+function switchTab(targetTabId, updateHash = true) {
+  const tabBtn = document.querySelector(`.nav-tab[data-tab="${targetTabId}"]`);
+  const targetContent = document.getElementById(targetTabId);
+  if (!tabBtn || !targetContent) return;
+
+  elements.navTabs.forEach(t => {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
+  elements.tabContents.forEach(c => c.classList.remove('active'));
+
+  tabBtn.classList.add('active');
+  tabBtn.setAttribute('aria-selected', 'true');
+  targetContent.classList.add('active');
+
+  if (updateHash) {
+    const hashName = targetTabId.replace('-tab', '');
+    history.replaceState(null, '', `#${hashName}`);
+  }
+
+  if (targetTabId === 'cluster-tab') {
+    setTimeout(fetchClusterData, 100);
+  } else if (targetTabId === 'pipeline-tab') {
+    setTimeout(fetchPipelineStatus, 100);
+  }
 }
 
 // ==================== TAB 1: SEARCH & RETRIEVAL ====================
@@ -726,11 +765,20 @@ function renderSearchResults(data) {
     </div>
   `).join('');
 
-  // Add Click Listener to open Recipe Modal
+  // Add Click & Keyboard Listener to open Recipe Modal
   elements.recipesGrid.querySelectorAll('.recipe-card').forEach(card => {
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
     card.addEventListener('click', () => {
       const recipeData = JSON.parse(card.getAttribute('data-recipe'));
       openRecipeModal(recipeData);
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const recipeData = JSON.parse(card.getAttribute('data-recipe'));
+        openRecipeModal(recipeData);
+      }
     });
   });
 }
@@ -762,7 +810,9 @@ function initPantry() {
     renderSelectedPantryPills();
     elements.pantryResultsGrid.innerHTML = `
       <div class="empty-state">
-        <div class="empty-icon">🥢</div>
+        <div class="empty-icon" aria-hidden="true">
+          <svg class="svg-icon svg-icon-lg" style="width:3rem;height:3rem;color:var(--text-muted);" viewBox="0 0 24 24"><path d="M18 2v4c0 .55-.45 1-1 1h-2a1 1 0 0 1-1-1V2"/><path d="M16 7v15"/><path d="M6 2v7a2 2 0 0 0 2 2v11"/><path d="M9 2v4a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2"/></svg>
+        </div>
         <h3>${t('pantry_empty_title')}</h3>
         <p>${t('pantry_empty_desc')}</p>
       </div>
@@ -877,7 +927,9 @@ function renderPantryResults(results) {
   if (results.length === 0) {
     elements.pantryResultsGrid.innerHTML = `
       <div class="empty-state">
-        <div class="empty-icon">🍣</div>
+        <div class="empty-icon" aria-hidden="true">
+          <svg class="svg-icon svg-icon-lg" style="width:3rem;height:3rem;color:var(--text-muted);" viewBox="0 0 24 24"><path d="M18 2v4c0 .55-.45 1-1 1h-2a1 1 0 0 1-1-1V2"/><path d="M16 7v15"/><path d="M6 2v7a2 2 0 0 0 2 2v11"/><path d="M9 2v4a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2"/></svg>
+        </div>
         <h3>${t('empty_search_title')}</h3>
       </div>
     `;
@@ -885,11 +937,11 @@ function renderPantryResults(results) {
   }
 
   elements.pantryResultsGrid.innerHTML = results.map(r => `
-    <div class="recipe-card" data-recipe='${JSON.stringify(r).replace(/'/g, "&apos;")}'>
+    <div class="recipe-card" role="button" tabindex="0" data-recipe='${JSON.stringify(r).replace(/'/g, "&apos;")}'>
       <div>
         <div class="recipe-card-header">
           <span class="cluster-badge">${escapeHtml(r.cluster_name || `Cluster ${r.cluster_id + 1}`)}</span>
-          <span class="score-badge" style="background: rgba(81, 207, 102, 0.15); color: #51cf66;">Match: ${Math.round((r.match_ratio || 0) * 100)}%</span>
+          <span class="score-badge">Match: ${Math.round((r.match_ratio || 0) * 100)}%</span>
         </div>
         <h3 class="recipe-card-title">${escapeHtml(r.title)}</h3>
         <div class="overlap-info">
@@ -908,6 +960,13 @@ function renderPantryResults(results) {
     card.addEventListener('click', () => {
       const recipeData = JSON.parse(card.getAttribute('data-recipe'));
       openRecipeModal(recipeData);
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const recipeData = JSON.parse(card.getAttribute('data-recipe'));
+        openRecipeModal(recipeData);
+      }
     });
   });
 }
@@ -1297,24 +1356,65 @@ function appendTerminalLog(msg) {
 
 // ==================== RECIPE MODAL & CLIPBOARD ====================
 function initModal() {
-  elements.modalCloseBtn.addEventListener('click', () => {
-    elements.recipeModal.style.display = 'none';
-  });
+  if (elements.modalCloseBtn) {
+    elements.modalCloseBtn.addEventListener('click', () => {
+      closeRecipeModal();
+    });
+  }
 
-  elements.recipeModal.addEventListener('click', (e) => {
-    if (e.target === elements.recipeModal) {
-      elements.recipeModal.style.display = 'none';
+  if (elements.recipeModal) {
+    elements.recipeModal.addEventListener('click', (e) => {
+      if (e.target === elements.recipeModal) {
+        closeRecipeModal();
+      }
+    });
+  }
+
+  // Keyboard navigation & Focus Trap
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (elements.recipeModal && elements.recipeModal.classList.contains('active')) {
+        closeRecipeModal();
+      }
+      if (elements.irTooltipPopup && elements.irTooltipPopup.style.display !== 'none') {
+        elements.irTooltipPopup.style.display = 'none';
+      }
+    }
+
+    // Modal Focus Trap
+    if (e.key === 'Tab' && elements.recipeModal && elements.recipeModal.classList.contains('active')) {
+      const focusables = elements.recipeModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (focusables.length > 0) {
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     }
   });
 
-  // Copy Ingredients Button with Fallback
+  // Browser Back Button to close modal
+  window.addEventListener('popstate', () => {
+    if (elements.recipeModal && elements.recipeModal.classList.contains('active')) {
+      closeRecipeModal(false);
+    }
+  });
+
+  // Copy Ingredients Button with SVG Feedback
   if (elements.copyIngredientsBtn) {
     elements.copyIngredientsBtn.addEventListener('click', () => {
       const text = elements.modalIngredientsText.textContent.trim();
       safeCopyText(text, () => {
-        elements.copyIngredientsBtn.textContent = t('btn_copied');
+        const checkSvg = `<svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>`;
+        elements.copyIngredientsBtn.innerHTML = `${checkSvg} <span>${t('btn_copied')}</span>`;
         setTimeout(() => {
-          elements.copyIngredientsBtn.textContent = `📋 ${t('btn_copy_ing')}`;
+          const copySvg = `<svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+          elements.copyIngredientsBtn.innerHTML = `${copySvg} <span data-i18n="btn_copy_ing">${t('btn_copy_ing')}</span>`;
         }, 2000);
       });
     });
@@ -1366,6 +1466,7 @@ function safeSetStorage(key, val) {
 }
 
 function openRecipeModal(recipe) {
+  state.lastFocusedElement = document.activeElement;
   elements.modalClusterBadge.textContent = recipe.cluster_name || `Cluster ${recipe.cluster_id + 1}`;
   elements.modalRecipeTitle.textContent = recipe.title;
   elements.modalRecipeScore.textContent = `Cosine Similarity: ${(recipe.score || 0).toFixed(4)}`;
@@ -1375,12 +1476,37 @@ function openRecipeModal(recipe) {
   elements.modalCleanedTokens.innerHTML = tokens.map(t => `<span class="token-pill">${escapeHtml(t)}</span>`).join('');
 
   elements.modalExternalLink.href = recipe.url && recipe.url !== 'No URL found' ? recipe.url : 'https://cookpad.com';
+  
   elements.recipeModal.style.display = 'flex';
+  requestAnimationFrame(() => {
+    elements.recipeModal.classList.add('active');
+    if (elements.modalCloseBtn) elements.modalCloseBtn.focus();
+  });
+
+  if (!window.location.hash.startsWith('#recipe-')) {
+    history.pushState({ modalOpen: true, recipeId: recipe.id }, '', `#recipe-${recipe.id || 'view'}`);
+  }
+}
+
+function closeRecipeModal(popHistory = true) {
+  if (!elements.recipeModal) return;
+  elements.recipeModal.classList.remove('active');
+  setTimeout(() => {
+    elements.recipeModal.style.display = 'none';
+  }, 220);
+
+  if (popHistory && window.location.hash.startsWith('#recipe-')) {
+    history.back();
+  }
+
+  if (state.lastFocusedElement && typeof state.lastFocusedElement.focus === 'function') {
+    state.lastFocusedElement.focus();
+  }
 }
 
 // ==================== EDUCATIONAL IR TOOLTIPS ====================
 function initTooltips() {
-  document.querySelectorAll('.info-tooltip-trigger').forEach(trigger => {
+  document.querySelectorAll('.info-tooltip-btn, .info-tooltip-trigger').forEach(trigger => {
     trigger.addEventListener('click', (e) => {
       e.stopPropagation();
       const tooltipKey = trigger.getAttribute('data-tooltip');
@@ -1399,7 +1525,7 @@ function initTooltips() {
   });
 
   document.addEventListener('click', (e) => {
-    if (!elements.irTooltipPopup.contains(e.target) && !e.target.classList.contains('info-tooltip-trigger')) {
+    if (elements.irTooltipPopup && !elements.irTooltipPopup.contains(e.target) && !e.target.closest('.info-tooltip-btn, .info-tooltip-trigger')) {
       elements.irTooltipPopup.style.display = 'none';
     }
   });

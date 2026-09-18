@@ -57,6 +57,10 @@ class JapaneseFoodIRHandler(SimpleHTTPRequestHandler):
         else:
             self.send_error(404, "Endpoint not found")
 
+    def end_headers(self):
+        self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+        super().end_headers()
+
     def send_json_response(self, data, status_code=200):
         response_bytes = json.dumps(data, ensure_ascii=False).encode('utf-8')
         self.send_response(status_code)

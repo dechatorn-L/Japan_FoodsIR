@@ -120,27 +120,17 @@ Japanese_Foods_IR-main/
 │       └── server.py
 │
 ├── web/                   # Zen Minimalist Frontend (Zero Build Step)
-│   ├── index.html         # 2-Tier Header, Bilingual DOM & Responsive Layout
-│   ├── style.css          # Zen Kyoto Minimalist Styling & CSS Variables
+│   ├── index.html         # Header, Bilingual DOM & Responsive Layout
+│   ├── style.css          # Zen Minimalist Editorial Styling & Tokens
 │   └── app.js             # Client-side i18n, Chart.js Controller & Event Handlers
 │
 ├── data/                  # Data Storage
 │   ├── raw/               # Raw Scraped CSVs
 │   └── processed/         # Cleaned Corpus (Japan_Food_Ingredients_Cleaned.csv)
 │
-├── docs/                  # Project Documentation
-│   ├── INDEX.md           # Documentation Hub
-│   ├── ARCHITECTURE.md    # Architecture & Data Flow
-│   ├── SPECIFICATION.md   # System Specifications & REST Contracts
-│   ├── STYLE_GUIDE.md     # UI Design System & Component Specs
-│   └── ROADMAP.md         # Future Plans
-│
-└── .agents/               # Agent Customizations & Skills
-    ├── rules/
-    │   └── style.md       # Concise Style Rule
-    └── skills/
-        └── food_IR/
-            └── SKILL.md   # Japanese Foods IR Skill Definition
+├── .gitattributes         # Cross-platform LF Line Endings Configuration
+├── CONTRIBUTING.md        # Contribution & Setup Guidelines
+└── LICENSE                # MIT Open-Source License
 ```
 
 ---
@@ -150,8 +140,8 @@ Japanese_Foods_IR-main/
 ### 5.1 Installation
 ```powershell
 # Clone repository
-git clone https://github.com/your-org/Japanese_Foods_IR.git
-cd Japanese_Foods_IR-main
+git clone https://github.com/dechatorn-L/Japan_FoodsIR.git
+cd Japan_FoodsIR
 
 # Install dependencies
 pip install -r requirements.txt

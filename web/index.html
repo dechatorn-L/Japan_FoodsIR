@@ -12,18 +12,20 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="theme-dark">
-  <!-- Ambient background glow elements -->
-  <div class="bg-glow bg-glow-1"></div>
-  <div class="bg-glow bg-glow-2"></div>
-  <div class="bg-pattern"></div>
-
-  <!-- Header: 2-Tier Modern App Bar (No Overlapping Guaranteed) -->
+  <!-- Header: Elegant Minimalist Japanese Culinary App Bar -->
   <header class="app-header">
     <div class="header-main-wrapper">
       <!-- Top Brand & Controls Row -->
       <div class="header-top-row">
         <div class="logo-group">
-          <div class="logo-icon">🍣</div>
+          <div class="logo-icon" aria-hidden="true">
+            <svg class="svg-icon svg-icon-lg" viewBox="0 0 24 24">
+              <path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/>
+              <path d="M7 21h10"/>
+              <path d="M19 12V8a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"/>
+              <path d="M12 3v3"/>
+            </svg>
+          </div>
           <div class="logo-text">
             <div class="logo-title">
               <span data-i18n="app_title_main">JAPANESE FOODS</span>
@@ -35,37 +37,50 @@
 
         <div class="header-controls">
           <!-- Language Toggle Pill -->
-          <button class="lang-toggle-pill" id="lang-toggle-btn" title="Switch Language / สลับภาษา">
-            <span class="lang-flag" id="lang-flag-icon">🇹🇭</span>
+          <button class="lang-toggle-pill" id="lang-toggle-btn" aria-label="Switch Language / สลับภาษา" title="Switch Language / สลับภาษา">
+            <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span class="lang-flag" id="lang-flag-icon">TH</span>
             <span class="lang-text" id="lang-text-label">ภาษาไทย</span>
           </button>
 
           <!-- Theme Toggle Button -->
-          <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Dark/Light Mode">
-            <span class="theme-icon">🌙</span>
+          <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Dark/Light Mode" title="Toggle Dark/Light Mode">
+            <span class="theme-icon" aria-hidden="true">
+              <svg class="svg-icon theme-icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </span>
           </button>
         </div>
       </div>
 
       <!-- Navigation Segmented Tabs Row -->
-      <nav class="nav-tabs-wrapper" id="main-nav-tabs">
-        <button class="nav-tab active" data-tab="search-tab" id="tab-btn-search">
-          <span class="tab-icon">🔍</span> <span data-i18n="nav_search">ค้นหาสูตรอาหาร</span>
+      <nav class="nav-tabs-wrapper" id="main-nav-tabs" role="tablist" aria-label="Main Navigation">
+        <button class="nav-tab active" data-tab="search-tab" id="tab-btn-search" role="tab" aria-selected="true" aria-controls="search-tab">
+          <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span data-i18n="nav_search">ค้นหาสูตรอาหาร</span>
         </button>
-        <button class="nav-tab" data-tab="pantry-tab" id="tab-btn-pantry">
-          <span class="tab-icon">🍱</span> <span data-i18n="nav_pantry">ค้นจากวัตถุดิบ</span>
+        <button class="nav-tab" data-tab="pantry-tab" id="tab-btn-pantry" role="tab" aria-selected="false" aria-controls="pantry-tab">
+          <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2v4c0 .55-.45 1-1 1h-2a1 1 0 0 1-1-1V2"/><path d="M16 7v15"/><path d="M6 2v7a2 2 0 0 0 2 2v11"/><path d="M9 2v4a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2"/></svg>
+          <span data-i18n="nav_pantry">ค้นจากวัตถุดิบ</span>
         </button>
-        <button class="nav-tab" data-tab="cluster-tab" id="tab-btn-cluster">
-          <span class="tab-icon">📊</span> <span data-i18n="nav_cluster">คลัสเตอร์ (PCA)</span>
+        <button class="nav-tab" data-tab="cluster-tab" id="tab-btn-cluster" role="tab" aria-selected="false" aria-controls="cluster-tab">
+          <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="6.5" r="2.5"/><circle cx="12" cy="17.5" r="2.5"/><circle cx="18" cy="16" r="2"/><line x1="9.5" y1="8.5" x2="14.5" y2="7.5"/><line x1="9" y1="9" x2="11" y2="15"/></svg>
+          <span data-i18n="nav_cluster">คลัสเตอร์ (PCA)</span>
         </button>
-        <button class="nav-tab" data-tab="index-tab" id="tab-btn-index">
-          <span class="tab-icon">📖</span> <span data-i18n="nav_index">ดัชนีคำศัพท์</span>
+        <button class="nav-tab" data-tab="index-tab" id="tab-btn-index" role="tab" aria-selected="false" aria-controls="index-tab">
+          <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span data-i18n="nav_index">ดัชนีคำศัพท์</span>
         </button>
-        <button class="nav-tab" data-tab="eval-tab" id="tab-btn-eval">
-          <span class="tab-icon">📈</span> <span data-i18n="nav_eval">ประเมินผล IR</span>
+        <button class="nav-tab" data-tab="eval-tab" id="tab-btn-eval" role="tab" aria-selected="false" aria-controls="eval-tab">
+          <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          <span data-i18n="nav_eval">ประเมินผล IR</span>
         </button>
-        <button class="nav-tab" data-tab="pipeline-tab" id="tab-btn-pipeline">
-          <span class="tab-icon">⚙️</span> <span data-i18n="nav_pipeline">จัดการข้อมูล</span>
+        <button class="nav-tab" data-tab="pipeline-tab" id="tab-btn-pipeline" role="tab" aria-selected="false" aria-controls="pipeline-tab">
+          <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/></svg>
+          <span data-i18n="nav_pipeline">จัดการข้อมูล</span>
         </button>
       </nav>
     </div>
@@ -82,34 +97,62 @@
         
         <!-- Search Input Box -->
         <div class="search-bar-container">
-          <span class="search-prefix-icon">🔍</span>
-          <input type="text" id="recipe-search-input" class="search-input" placeholder="พิมพ์ชื่อเมนู หรือวัตถุดิบ (เช่น ramen, teriyaki chicken, curry, miso)..." autofocus autocomplete="off">
-          <button id="search-clear-btn" class="search-clear-btn" title="Clear Search" style="display: none;">✕</button>
+          <span class="search-prefix-icon" aria-hidden="true">
+            <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="text" id="recipe-search-input" class="search-input" placeholder="พิมพ์ชื่อเมนู หรือวัตถุดิบ (เช่น ramen, teriyaki chicken, curry, miso)..." autofocus autocomplete="off" aria-label="Search recipes">
+          <button id="search-clear-btn" class="search-clear-btn" aria-label="Clear Search" title="Clear Search" style="display: none;">
+            <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
           <button id="search-btn" class="search-submit-btn" data-i18n="btn_search">ค้นหา</button>
         </div>
 
         <!-- Category Filter Chips -->
-        <div class="category-chips-row">
-          <button class="category-chip active" data-cat="all" data-i18n="cat_all">✨ ทั้งหมด (All)</button>
-          <button class="category-chip" data-cat="ramen" data-i18n="cat_ramen">🍜 ราเมน & เส้น (Ramen)</button>
-          <button class="category-chip" data-cat="curry" data-i18n="cat_curry">🍛 แกงกะหรี่ (Curry)</button>
-          <button class="category-chip" data-cat="yakitori" data-i18n="cat_yakitori">🍢 ไก่ย่าง & เนื้อ (Meat)</button>
-          <button class="category-chip" data-cat="donburi" data-i18n="cat_donburi">🍱 ข้าวหน้า (Donburi)</button>
-          <button class="category-chip" data-cat="tofu" data-i18n="cat_tofu">🥗 สลัด & เต้าหู้ (Tofu)</button>
-          <button class="category-chip" data-cat="dessert" data-i18n="cat_dessert">🍵 ขนมหวาน (Dessert)</button>
+        <div class="category-chips-row" role="group" aria-label="Filter by recipe category">
+          <button class="category-chip active" data-cat="all">
+            <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+            <span data-i18n="cat_all">ทั้งหมด (All)</span>
+          </button>
+          <button class="category-chip" data-cat="ramen">
+            <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M7 21h10"/><path d="M8 8v4"/><path d="M12 7v5"/><path d="M16 8v4"/></svg>
+            <span data-i18n="cat_ramen">ราเมน & เส้น (Ramen)</span>
+          </button>
+          <button class="category-chip" data-cat="curry">
+            <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9H4Z"/><path d="M2 9h20"/><path d="M12 5V2"/><path d="M8 6v-2"/><path d="M16 6v-2"/></svg>
+            <span data-i18n="cat_curry">แกงกะหรี่ (Curry)</span>
+          </button>
+          <button class="category-chip" data-cat="yakitori">
+            <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+            <span data-i18n="cat_yakitori">ไก่ย่าง & เนื้อ (Meat)</span>
+          </button>
+          <button class="category-chip" data-cat="donburi">
+            <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M7 21h10"/><circle cx="12" cy="12" r="3"/></svg>
+            <span data-i18n="cat_donburi">ข้าวหน้า (Donburi)</span>
+          </button>
+          <button class="category-chip" data-cat="tofu">
+            <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            <span data-i18n="cat_tofu">สลัด & เต้าหู้ (Tofu)</span>
+          </button>
+          <button class="category-chip" data-cat="dessert">
+            <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+            <span data-i18n="cat_dessert">ขนมหวาน (Dessert)</span>
+          </button>
         </div>
 
         <!-- Query Expansion Notification Bar (Compact & Sleek) -->
         <div class="query-expansion-compact" id="query-expansion-card" style="display: none;">
           <div class="expansion-compact-left">
-            <span class="badge-mini-prf">⚡ PRF Expansion</span>
+            <span class="badge-mini-prf">
+              <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span>PRF Expansion</span>
+            </span>
             <span class="expansion-text-preview">
               <span data-i18n="exp_orig">คำค้นเดิม:</span> <code id="exp-original-query" class="code-tag">-</code>
               &rarr; <span data-i18n="exp_final">ขยายผล:</span> <code id="exp-final-query" class="code-tag highlight">-</code>
             </span>
           </div>
           <div class="expansion-terms-list" id="added-terms-container"></div>
-          <span class="info-tooltip-trigger" data-tooltip="prf_info" title="What is PRF?">ℹ️</span>
+          <button type="button" class="info-tooltip-btn" data-tooltip="prf_info" aria-label="What is Pseudo-Relevance Feedback (PRF)?">ℹ</button>
         </div>
       </div>
 
@@ -117,7 +160,7 @@
       <div class="results-toolbar">
         <div class="filter-cluster-pills-bar">
           <span class="toolbar-label" data-i18n="filter_cluster_label">กลุ่มคลัสเตอร์:</span>
-          <div class="cluster-pill-group" id="cluster-filter-group">
+          <div class="cluster-pill-group" id="cluster-filter-group" role="group" aria-label="Filter by cluster">
             <button class="cluster-pill active" data-cluster="all" data-i18n="cluster_all">ทั้งหมด</button>
             <button class="cluster-pill" data-cluster="0">C1</button>
             <button class="cluster-pill" data-cluster="1">C2</button>
@@ -140,7 +183,9 @@
           <!-- Dynamically populated -->
         </div>
         <div class="empty-state" id="empty-state" style="display: none;">
-          <div class="empty-icon">🍣</div>
+          <div class="empty-icon" aria-hidden="true">
+            <svg class="svg-icon svg-icon-lg" style="width:3.2rem;height:3.2rem;color:var(--text-muted);" viewBox="0 0 24 24"><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M7 21h10"/><path d="M19 12V8a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"/><line x1="12" y1="2" x2="12" y2="5"/></svg>
+          </div>
           <h3 data-i18n="empty_search_title">ไม่พบสูตรอาหารที่ตรงกับคำค้นหา</h3>
           <p data-i18n="empty_search_desc">ลองเปลี่ยนคำค้นหา หรือเลือกหมวดหมู่อาหารอื่นด้านบน</p>
         </div>
@@ -150,7 +195,10 @@
     <!-- ==================== TAB 2: Pantry Matcher ==================== -->
     <section class="tab-content" id="pantry-tab">
       <div class="tab-header-card">
-        <h2 class="section-title" data-i18n="pantry_title">🍱 ค้นหาสูตรอาหารจากวัตถุดิบในตู้เย็น (Pantry Matcher)</h2>
+        <h2 class="section-title">
+          <svg class="svg-icon svg-icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2v4c0 .55-.45 1-1 1h-2a1 1 0 0 1-1-1V2"/><path d="M16 7v15"/><path d="M6 2v7a2 2 0 0 0 2 2v11"/><path d="M9 2v4a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2"/></svg>
+          <span data-i18n="pantry_title">ค้นหาสูตรอาหารจากวัตถุดิบในตู้เย็น (Pantry Matcher)</span>
+        </h2>
         <p class="section-desc" data-i18n="pantry_desc">เลือกวัตถุดิบที่มีอยู่ในครัว หรือกดปุ่มเมนูลัด ระบบ VSM จะคำนวณและแนะนำเมนูญี่ปุ่นที่มีสัดส่วนวัตถุดิบตรงกับที่คุณมีมากที่สุด</p>
       </div>
 
@@ -160,41 +208,53 @@
           <!-- Presets Section -->
           <div class="zen-card">
             <div class="card-title-row">
-              <span class="card-icon">⚡</span>
+              <span class="card-icon" aria-hidden="true">
+                <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </span>
               <h3 data-i18n="preset_title">ชุดวัตถุดิบสำเร็จรูป (One-Click Presets)</h3>
             </div>
             <p class="sub-caption" data-i18n="preset_desc">คลิกเพื่อเลือกชุดวัตถุดิบยอดนิยมทันที</p>
-            <div class="pantry-presets-grid">
+            <div class="pantry-presets-grid" role="group" aria-label="Preset ingredient packages">
               <button class="preset-btn" data-preset="noodle">
-                <span class="preset-icon">🍜</span>
+                <span class="preset-icon" aria-hidden="true">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M7 21h10"/><path d="M8 8v4"/><path d="M12 7v5"/><path d="M16 8v4"/></svg>
+                </span>
                 <div class="preset-text-group">
                   <b data-i18n="preset_noodle_title">มื้อด่วนราเมน/อุด้ง</b>
                   <small>udon, dashi, soy sauce, green onion, egg</small>
                 </div>
               </button>
               <button class="preset-btn" data-preset="izakaya">
-                <span class="preset-icon">🍢</span>
+                <span class="preset-icon" aria-hidden="true">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+                </span>
                 <div class="preset-text-group">
                   <b data-i18n="preset_izakaya_title">ชุดปาร์ตี้อิซากายะ</b>
                   <small>chicken, tare sauce, sake, garlic, ginger</small>
                 </div>
               </button>
               <button class="preset-btn" data-preset="curry">
-                <span class="preset-icon">🍛</span>
+                <span class="preset-icon" aria-hidden="true">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9H4Z"/><path d="M2 9h20"/><path d="M12 5V2"/><path d="M8 6v-2"/><path d="M16 6v-2"/></svg>
+                </span>
                 <div class="preset-text-group">
                   <b data-i18n="preset_curry_title">ข้าวแกงกะหรี่อบอุ่น</b>
                   <small>curry roux, onion, carrot, potato, chicken/beef</small>
                 </div>
               </button>
               <button class="preset-btn" data-preset="healthy">
-                <span class="preset-icon">🥗</span>
+                <span class="preset-icon" aria-hidden="true">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                </span>
                 <div class="preset-text-group">
                   <b data-i18n="preset_healthy_title">ชุดสุขภาพ & เต้าหู้</b>
                   <small>tofu, spinach, sesame oil, miso, cucumber</small>
                 </div>
               </button>
               <button class="preset-btn" data-preset="bento">
-                <span class="preset-icon">🍙</span>
+                <span class="preset-icon" aria-hidden="true">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18"/><path d="M12 12v9"/></svg>
+                </span>
                 <div class="preset-text-group">
                   <b data-i18n="preset_bento_title">ข้าวกล่องเบนโตะ</b>
                   <small>rice, salmon, nori, egg, mirin, soy sauce</small>
@@ -206,7 +266,9 @@
           <!-- Common Staples & Selection Box -->
           <div class="zen-card">
             <div class="card-title-row">
-              <span class="card-icon">🥢</span>
+              <span class="card-icon" aria-hidden="true">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 2v4c0 .55-.45 1-1 1h-2a1 1 0 0 1-1-1V2"/><path d="M16 7v15"/><path d="M6 2v7a2 2 0 0 0 2 2v11"/><path d="M9 2v4a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2"/></svg>
+              </span>
               <h3 data-i18n="common_ing_title">เลือกวัตถุดิบอาหารญี่ปุ่น</h3>
             </div>
             <p class="sub-caption" data-i18n="common_ing_desc">คลิกเพื่อเลือกหรือยกเลิกวัตถุดิบ</p>
@@ -215,7 +277,7 @@
             </div>
             
             <div class="custom-ing-input-group">
-              <input type="text" id="custom-ingredient-input" placeholder="เพิ่มวัตถุดิบอื่น (เช่น dashi, mirin, sake)...">
+              <input type="text" id="custom-ingredient-input" placeholder="เพิ่มวัตถุดิบอื่น (เช่น dashi, mirin, sake)..." aria-label="Add custom ingredient">
               <button id="add-ingredient-btn" class="btn-secondary" data-i18n="btn_add_ing">+ เพิ่ม</button>
             </div>
 
@@ -229,7 +291,10 @@
               </div>
             </div>
 
-            <button id="pantry-search-btn" class="btn-primary btn-block" data-i18n="btn_find_pantry">🔎 ค้นหาเมนูอาหารที่ทำได้</button>
+            <button id="pantry-search-btn" class="btn-primary btn-block">
+              <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span data-i18n="btn_find_pantry">ค้นหาเมนูอาหารที่ทำได้</span>
+            </button>
           </div>
         </div>
 
@@ -241,7 +306,9 @@
           </div>
           <div class="recipes-grid" id="pantry-results-grid">
             <div class="empty-state">
-              <div class="empty-icon">🥢</div>
+              <div class="empty-icon" aria-hidden="true">
+                <svg class="svg-icon svg-icon-lg" style="width:3rem;height:3rem;color:var(--text-muted);" viewBox="0 0 24 24"><path d="M18 2v4c0 .55-.45 1-1 1h-2a1 1 0 0 1-1-1V2"/><path d="M16 7v15"/><path d="M6 2v7a2 2 0 0 0 2 2v11"/><path d="M9 2v4a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2"/></svg>
+              </div>
               <h3 data-i18n="pantry_empty_title">เลือกวัตถุดิบทางด้านซ้ายเพื่อเริ่มค้นหา</h3>
               <p data-i18n="pantry_empty_desc">เลือกวัตถุดิบพื้นฐาน หรือคลิกชุด Presets ด้านบน</p>
             </div>
@@ -253,16 +320,19 @@
     <!-- ==================== TAB 3: Cluster Map (PCA) ==================== -->
     <section class="tab-content" id="cluster-tab">
       <div class="tab-header-card">
-        <h2 class="section-title" data-i18n="cluster_title">📊 แผนภาพการจัดกลุ่มเมนูอาหาร (K-Means & 2D PCA)</h2>
+        <h2 class="section-title">
+          <svg class="svg-icon svg-icon-lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="6.5" r="2.5"/><circle cx="12" cy="17.5" r="2.5"/><circle cx="18" cy="16" r="2"/><line x1="9.5" y1="8.5" x2="14.5" y2="7.5"/><line x1="9" y1="9" x2="11" y2="15"/></svg>
+          <span data-i18n="cluster_title">แผนภาพการจัดกลุ่มเมนูอาหาร (K-Means & 2D PCA)</span>
+        </h2>
         <p class="section-desc" data-i18n="cluster_desc">สูตรอาหารทั้งหมดถูกจัดกลุ่มเป็น 6 คลัสเตอร์ตามคุณลักษณะ TF-IDF และลดมิติข้อมูลลงสู่ระนาบ 2D ด้วย Principal Component Analysis (PCA)</p>
       </div>
 
       <div class="cluster-layout">
         <div class="chart-container-card">
           <div class="chart-header">
-            <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
               <span class="chart-title" data-i18n="pca_chart_title">การกระจายตัวของสูตรอาหารในระนาบ 2D PCA</span>
-              <span class="info-tooltip-trigger" data-tooltip="pca_info">ℹ️</span>
+              <button type="button" class="info-tooltip-btn" data-tooltip="pca_info" aria-label="What is 2D PCA & Clustering?">ℹ</button>
             </div>
             <span class="chart-subtitle">K-Means (K=6) with Centroids (✖)</span>
           </div>
@@ -283,7 +353,10 @@
     <!-- ==================== TAB 4: Inverted Index Inspector ==================== -->
     <section class="tab-content" id="index-tab">
       <div class="tab-header-card">
-        <h2 class="section-title" data-i18n="index_title">📖 ดัชนีคำศัพท์แบบผกผัน (Inverted Index Inspector)</h2>
+        <h2 class="section-title">
+          <svg class="svg-icon svg-icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span data-i18n="index_title">ดัชนีคำศัพท์แบบผกผัน (Inverted Index Inspector)</span>
+        </h2>
         <p class="section-desc" data-i18n="index_desc">ตรวจสอบความถี่การปรากฏในเอกสาร (Document Frequency: DF) และรายการชี้เอกสาร (Postings List) ของคำศัพท์แต่ละคำในคลังข้อมูล</p>
       </div>
 
@@ -291,15 +364,15 @@
         <div class="zen-card">
           <div class="card-title-row">
             <h3 data-i18n="index_lookup_title">ค้นหาคำศัพท์ใน Inverted Index</h3>
-            <span class="info-tooltip-trigger" data-tooltip="inverted_index_info">ℹ️</span>
+            <button type="button" class="info-tooltip-btn" data-tooltip="inverted_index_info" aria-label="What is Inverted Index?">ℹ</button>
           </div>
           <div class="search-bar-container" style="margin-bottom: 1.25rem;">
-            <input type="text" id="term-lookup-input" class="search-input" placeholder="พิมพ์คำศัพท์ (เช่น chicken, dashi, soy, miso, ramen)...">
+            <input type="text" id="term-lookup-input" class="search-input" placeholder="พิมพ์คำศัพท์ (เช่น chicken, dashi, soy, miso, ramen)..." aria-label="Lookup term in index">
             <button id="lookup-term-btn" class="search-submit-btn" data-i18n="btn_inspect">ตรวจสอบ Postings</button>
           </div>
           <div class="popular-terms-row">
             <span class="popular-terms-label" data-i18n="quick_lookup_label">คำศัพท์ยอดนิยม:</span>
-            <div class="popular-terms-chips">
+            <div class="popular-terms-chips" role="group" aria-label="Popular vocabulary terms">
               <button class="term-quick-btn" data-term="chicken">chicken</button>
               <button class="term-quick-btn" data-term="sauce">sauce</button>
               <button class="term-quick-btn" data-term="soy">soy</button>
@@ -341,7 +414,10 @@
     <!-- ==================== TAB 5: IR Evaluation ==================== -->
     <section class="tab-content" id="eval-tab">
       <div class="tab-header-card">
-        <h2 class="section-title" data-i18n="eval_title">📈 กระดานประเมินประสิทธิภาพระบบสืบค้น (IR Evaluation)</h2>
+        <h2 class="section-title">
+          <svg class="svg-icon svg-icon-lg" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          <span data-i18n="eval_title">กระดานประเมินประสิทธิภาพระบบสืบค้น (IR Evaluation)</span>
+        </h2>
         <p class="section-desc" data-i18n="eval_desc">วัดผลคุณภาพการสืบค้นข้อมูลตามหลักทฤษฎี Information Retrieval ด้วยมาตรวัด Precision@K, Recall@K, Average Precision (AP), และ Mean Average Precision (MAP)</p>
       </div>
 
@@ -349,7 +425,7 @@
         <div class="zen-card">
           <div class="card-title-row">
             <h3 data-i18n="eval_run_title">ทดสอบประเมินคำค้นหา (Query Benchmark)</h3>
-            <span class="info-tooltip-trigger" data-tooltip="eval_info">ℹ️</span>
+            <button type="button" class="info-tooltip-btn" data-tooltip="eval_info" aria-label="What are IR Evaluation Metrics?">ℹ</button>
           </div>
           <div class="eval-input-grid">
             <div class="form-group">
@@ -365,12 +441,12 @@
           
           <div class="benchmark-suite">
             <h4 data-i18n="benchmark_suite_label">ชุดคำถามทดสอบมาตรฐาน (Benchmark Suite):</h4>
-            <div class="benchmark-pills">
-              <button class="benchmark-pill" data-q="japanese curry" data-k="10">🍛 Japanese Curry (K=10)</button>
-              <button class="benchmark-pill" data-q="chicken meatballs" data-k="10">🍡 Chicken Meatballs (K=10)</button>
-              <button class="benchmark-pill" data-q="ramen noodles" data-k="10">🍜 Ramen Noodles (K=10)</button>
-              <button class="benchmark-pill" data-q="cucumber salad" data-k="10">🥒 Cucumber Salad (K=10)</button>
-              <button class="benchmark-pill" data-q="gyoza dumplings" data-k="10">🥟 Gyoza Dumplings (K=10)</button>
+            <div class="benchmark-pills" role="group" aria-label="Standard benchmark queries">
+              <button class="benchmark-pill" data-q="japanese curry" data-k="10">Japanese Curry (K=10)</button>
+              <button class="benchmark-pill" data-q="chicken meatballs" data-k="10">Chicken Meatballs (K=10)</button>
+              <button class="benchmark-pill" data-q="ramen noodles" data-k="10">Ramen Noodles (K=10)</button>
+              <button class="benchmark-pill" data-q="cucumber salad" data-k="10">Cucumber Salad (K=10)</button>
+              <button class="benchmark-pill" data-q="gyoza dumplings" data-k="10">Gyoza Dumplings (K=10)</button>
             </div>
           </div>
         </div>
@@ -380,7 +456,7 @@
           <div class="metric-card">
             <div class="metric-header">
               <span>Precision@K (P@K)</span>
-              <span class="info-tooltip-trigger" data-tooltip="precision_info">ℹ️</span>
+              <button type="button" class="info-tooltip-btn" data-tooltip="precision_info" aria-label="What is Precision@K?">ℹ</button>
             </div>
             <div class="metric-number" id="metric-pk">-</div>
             <div class="metric-desc" data-i18n="metric_pk_desc">สัดส่วนเอกสารที่ตรงความต้องการ ในบรรดา K ลำดับแรกที่ดึงมา</div>
@@ -388,7 +464,7 @@
           <div class="metric-card">
             <div class="metric-header">
               <span>Recall@K (R@K)</span>
-              <span class="info-tooltip-trigger" data-tooltip="recall_info">ℹ️</span>
+              <button type="button" class="info-tooltip-btn" data-tooltip="recall_info" aria-label="What is Recall@K?">ℹ</button>
             </div>
             <div class="metric-number" id="metric-rk">-</div>
             <div class="metric-desc" data-i18n="metric_rk_desc">สัดส่วนเอกสารที่ดึงมาได้ ต่อจำนวนเอกสารที่เกี่ยวข้องทั้งหมดในระบบ</div>
@@ -396,7 +472,7 @@
           <div class="metric-card">
             <div class="metric-header">
               <span>Average Precision (AP)</span>
-              <span class="info-tooltip-trigger" data-tooltip="ap_info">ℹ️</span>
+              <button type="button" class="info-tooltip-btn" data-tooltip="ap_info" aria-label="What is Average Precision?">ℹ</button>
             </div>
             <div class="metric-number" id="metric-ap">-</div>
             <div class="metric-desc" data-i18n="metric_ap_desc">พื้นที่ใต้กราฟ Precision-Recall โดยคำนึงถึงลำดับความสำคัญของเอกสาร</div>
@@ -404,7 +480,7 @@
           <div class="metric-card">
             <div class="metric-header">
               <span data-i18n="confusion_metrics_title">Confusion Metrics</span>
-              <span class="info-tooltip-trigger" data-tooltip="confusion_info">ℹ️</span>
+              <button type="button" class="info-tooltip-btn" data-tooltip="confusion_info" aria-label="What is the Confusion Matrix?">ℹ</button>
             </div>
             <div class="confusion-stats">
               <span class="badge-tp" title="True Positives">TP: <b id="metric-tp">-</b></span>
@@ -452,7 +528,10 @@
     <!-- ==================== TAB 6: Data Pipeline & Web Scraper ==================== -->
     <section class="tab-content" id="pipeline-tab">
       <div class="tab-header-card">
-        <h2 class="section-title" data-i18n="pipeline_title">⚙️ ระบบท่อส่งข้อมูล & เว็บสแครปเปอร์ (Data Pipeline)</h2>
+        <h2 class="section-title">
+          <svg class="svg-icon svg-icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/></svg>
+          <span data-i18n="pipeline_title">ระบบท่อส่งข้อมูล & เว็บสแครปเปอร์ (Data Pipeline)</span>
+        </h2>
         <p class="section-desc" data-i18n="pipeline_desc">จัดการชุดข้อมูลสูตรอาหารญี่ปุ่น สั่งดึงข้อมูลสดจากเว็บไซต์ Cookpad/Culinary API, ล้าง Stopwords และสร้างโมเดล VSM ใหม่แบบ Hot-Reload</p>
       </div>
 
@@ -486,14 +565,16 @@
           <!-- Quick Clean & Reindex Card -->
           <div class="zen-card action-card">
             <div class="action-card-header">
-              <span class="action-icon">🔄</span>
+              <span class="action-icon" aria-hidden="true">
+                <svg class="svg-icon svg-icon-lg" viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+              </span>
               <div>
                 <h3 data-i18n="card_reindex_title">ล้างข้อมูลและ Re-Index ทันที</h3>
                 <p data-i18n="card_reindex_desc">ตัดคำด้วย NLTK ล้าง Culinary Stopwords และฟิตโมเดล TF-IDF + K-Means ใหม่จากไฟล์ข้อมูลเดิม</p>
               </div>
             </div>
             <div class="action-card-footer">
-              <span class="speed-badge" data-i18n="speed_instant">⚡ รวดเร็ว (~1 วินาที)</span>
+              <span class="speed-badge"><svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> <span data-i18n="speed_instant">รวดเร็ว (~1 วินาที)</span></span>
               <button id="quick-reindex-btn" class="btn-secondary" data-i18n="btn_run_reindex">รัน Re-Index ทันที</button>
             </div>
           </div>
@@ -501,7 +582,9 @@
           <!-- Live Web Scraper Card -->
           <div class="zen-card action-card action-card-highlight">
             <div class="action-card-header">
-              <span class="action-icon">🌐</span>
+              <span class="action-icon" aria-hidden="true">
+                <svg class="svg-icon svg-icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </span>
               <div>
                 <h3 data-i18n="card_scrape_title">ดึงข้อมูลสูตรอาหารสด (Live Web Scraper)</h3>
                 <p data-i18n="card_scrape_desc">Crawl เมนูอาหารญี่ปุ่นจาก Cookpad / Culinary API พร้อมสกัดวัตถุดิบและอัปเดตระบบสืบค้นอัตโนมัติ</p>
@@ -517,7 +600,10 @@
                   <option value="100" selected>100 เมนู (เต็มชุดข้อมูล ~20s)</option>
                 </select>
               </div>
-              <button id="start-scraping-btn" class="btn-primary" data-i18n="btn_start_scrape">🌐 Scrape & Rebuild Dataset</button>
+              <button id="start-scraping-btn" class="btn-primary" data-i18n="btn_start_scrape">
+                <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span>Scrape & Rebuild Dataset</span>
+              </button>
             </div>
           </div>
         </div>
@@ -525,7 +611,10 @@
         <!-- Terminal Log Viewer -->
         <div class="terminal-card">
           <div class="terminal-header">
-            <span>💻 <span data-i18n="terminal_header">บันทึกการทำงานของระบบ (Pipeline Execution Log)</span></span>
+            <span style="display: flex; align-items: center; gap: 0.5rem;">
+              <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              <span data-i18n="terminal_header">บันทึกการทำงานของระบบ (Pipeline Execution Log)</span>
+            </span>
             <button id="clear-logs-btn" class="btn-link" data-i18n="btn_clear_logs">ล้างประวัติ Log</button>
           </div>
           <div class="terminal-body" id="pipeline-terminal-body">
@@ -537,9 +626,11 @@
   </main>
 
   <!-- ==================== Recipe Detail Modal ==================== -->
-  <div class="modal-overlay" id="recipe-modal" style="display: none;">
+  <div class="modal-overlay" id="recipe-modal" role="dialog" aria-modal="true" aria-labelledby="modal-recipe-title">
     <div class="modal-card">
-      <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close recipe details">
+        <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
       <div class="modal-header">
         <span class="modal-cluster-badge" id="modal-cluster-badge">Cluster 1</span>
         <h2 class="modal-title" id="modal-recipe-title">Recipe Title</h2>
@@ -550,21 +641,31 @@
       <div class="modal-body">
         <div class="modal-section">
           <div class="section-title-with-action">
-            <h3 data-i18n="modal_ing_title">🥢 รายการวัตถุดิบ (Ingredients):</h3>
-            <button id="copy-ingredients-btn" class="btn-copy-sm" title="Copy Ingredients">📋 <span data-i18n="btn_copy_ing">คัดลอกวัตถุดิบ</span></button>
+            <h3 data-i18n="modal_ing_title" style="display:flex;align-items:center;gap:0.4rem;">
+              <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2v4c0 .55-.45 1-1 1h-2a1 1 0 0 1-1-1V2"/><path d="M16 7v15"/><path d="M6 2v7a2 2 0 0 0 2 2v11"/><path d="M9 2v4a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2"/></svg>
+              <span>รายการวัตถุดิบ (Ingredients):</span>
+            </h3>
+            <button id="copy-ingredients-btn" class="btn-copy-sm" aria-label="Copy Ingredients" title="Copy Ingredients">
+              <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="btn_copy_ing">คัดลอกวัตถุดิบ</span>
+            </button>
           </div>
           <div class="ingredients-content-box" id="modal-ingredients-text">
             Ingredients details...
           </div>
         </div>
         <div class="modal-section">
-          <h3 data-i18n="modal_tokens_title">🏷️ Cleaned IR Tokens (คำสำคัญที่ใช้ในการสืบค้น):</h3>
+          <h3 data-i18n="modal_tokens_title" style="display:flex;align-items:center;gap:0.4rem;">
+            <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></svg>
+            <span>Cleaned IR Tokens (คำสำคัญที่ใช้ในการสืบค้น):</span>
+          </h3>
           <div class="token-pills" id="modal-cleaned-tokens"></div>
         </div>
       </div>
       <div class="modal-footer">
-        <a id="modal-external-link" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary" data-i18n="btn_view_cookpad">
-          ดูสูตรต้นฉบับบนเว็บ Cookpad ↗
+        <a id="modal-external-link" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary" style="display:inline-flex;align-items:center;gap:0.5rem;">
+          <span data-i18n="btn_view_cookpad">ดูสูตรต้นฉบับบนเว็บ Cookpad</span>
+          <svg class="svg-icon svg-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </a>
       </div>
     </div>

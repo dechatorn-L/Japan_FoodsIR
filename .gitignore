@@ -80,3 +80,7 @@ Thumbs.db
 scratch/
 tmp/
 temp/
+
+# Antigravity / Gemini agent workspaces
+.agents/
+.tempmediaStorage/
